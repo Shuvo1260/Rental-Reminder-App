@@ -7,6 +7,14 @@
     <string name="logoContentDescription">Logo</string>
 
 
+<!--    Property list item-->
+    <string name="currentTenantName">Current tenant name</string>
+    <string name="currentTenantPhone">Mobile number</string>
+
+<!--    Particular Items-->
+    <string name="dateTitle">Date:</string>
+    <string name="rupeeSign">₹</string>
+
     <!--    Menu items name-->
     <string name="home">Home</string>
     <string name="oldTenant">Old Tenant</string>

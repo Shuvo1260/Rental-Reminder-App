@@ -10,11 +10,52 @@
         android:background="@color/colorPrimaryDark"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalRantOfThisMonth"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/total_amount_stroke"
+                tools:text="₹₹₹₹₹₹₹"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/listOfMyProperties"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add"

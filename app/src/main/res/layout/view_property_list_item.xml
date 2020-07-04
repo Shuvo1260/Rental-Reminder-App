@@ -31,6 +31,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
+                android:transitionName="@string/buildingNameTransition"
                 />
             <TextView
                 android:id="@+id/details"
@@ -81,6 +82,7 @@
                 android:text="@string/currentTenantName"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
+                android:transitionName="@string/tenantNameTransition"
                 />
 
             <TextView
@@ -94,6 +96,7 @@
                 tools:text="9999999999"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
+                android:transitionName="@string/mobileNumberTransition"
                 />
 
             <TextView

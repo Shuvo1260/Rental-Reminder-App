@@ -6,20 +6,33 @@
 
     <string name="logoContentDescription">Logo</string>
 
+    <!--    Home-->
+    <string name="totalRantOfThisMonth">Total rant received this month</string>
+    <string name="listOfMyProperties">List of my properties</string>
 
-<!--    Property list item-->
+
+    <!--    Property list item-->
     <string name="currentTenantName">Current tenant name</string>
     <string name="currentTenantPhone">Mobile number</string>
+    <string name="totalDebit">Total debit:</string>
+    <string name="totalCredit">Total credit:</string>
 
-<!--    Particular Items-->
+    <!--    Particular Items-->
     <string name="dateTitle">Date:</string>
-    <string name="rupeeSign">₹</string>
+    <string name="rupeeSign">₹</string>>
+    <string name="particulars">Particulars</string>
 
     <!--    Menu items name-->
     <string name="home">Home</string>
     <string name="oldTenant">Old Tenant</string>
     <string name="backupAndRestore">Backup and Restore</string>
     <string name="exit">Exit</string>
+
+<!--    Transaction-->
+    <string name="mobileNumberTransition">mobileNumberTransition</string>
+    <string name="tenantNameTransition">tenantNameTransition</string>
+    <string name="buildingNameTransition">buildingNameTransition</string>
+
 
 
     <!--    Navigation toggle string-->

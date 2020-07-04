@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Rental Reminder App</string>
+
+    <string name="splashScreenTitle">The Rental Reminder App</string>
+    <string name="splashScreenSubTitle">Tradinget</string>
+
+    <string name="logoContentDescription">Logo</string>
+
+
+
+<!--    Menu items name-->
+    <string name="home">Home</string>
+    <string name="oldTenant">Old Tenant</string>
+    <string name="backupAndRestore">Backup and Restore</string>
+    <string name="exit">Exit</string>
+
+
+<!--    Navigation toggle string-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

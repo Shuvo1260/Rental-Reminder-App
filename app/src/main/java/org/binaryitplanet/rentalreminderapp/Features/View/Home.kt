@@ -1,5 +1,6 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,7 +25,8 @@ class Home : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.add.setOnClickListener {
-            //
+            val intent = Intent(context, AddProperty::class.java)
+            startActivity(intent)
         }
 
         return binding.root

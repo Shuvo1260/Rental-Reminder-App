@@ -6,10 +6,20 @@
 
     <string name="logoContentDescription">Logo</string>
 
+
+    <!--    Hints-->
+
+    <string name="buildingName">Building name</string>
+    <string name="tenantName">Tenant name</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="idProof">ID proof</string>
+
     <!--    Home-->
     <string name="totalRantOfThisMonth">Total rant received this month</string>
     <string name="listOfMyProperties">List of my properties</string>
 
+    <!--    Property view-->
+    <string name="transactionType">Type</string>
 
     <!--    Property list item-->
     <string name="currentTenantName">Current tenant name</string>
@@ -21,18 +31,22 @@
     <string name="dateTitle">Date:</string>
     <string name="rupeeSign">₹</string>>
     <string name="particulars">Particulars</string>
+    <string name="amount">Amount</string>
+    <string name="month">Month</string>
+    <string name="year">Year</string>
 
     <!--    Menu items name-->
     <string name="home">Home</string>
     <string name="oldTenant">Old Tenant</string>
     <string name="backupAndRestore">Backup and Restore</string>
     <string name="exit">Exit</string>
+    <string name="leave">Leave</string>
+    <string name="done">Done</string>
 
-<!--    Transaction-->
+    <!--    Transaction-->
     <string name="mobileNumberTransition">mobileNumberTransition</string>
     <string name="tenantNameTransition">tenantNameTransition</string>
     <string name="buildingNameTransition">buildingNameTransition</string>
-
 
 
     <!--    Navigation toggle string-->

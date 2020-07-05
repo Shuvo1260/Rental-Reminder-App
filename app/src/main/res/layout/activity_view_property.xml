@@ -19,7 +19,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            android:theme="@style/overFlowMenuTheme"
+            app:popupTheme="@style/popupStyle">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,6 +174,7 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/_20sdp"
             android:src="@drawable/ic_write"
+            app:tint="@color/white"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

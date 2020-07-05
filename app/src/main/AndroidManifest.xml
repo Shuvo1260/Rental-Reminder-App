@@ -15,10 +15,17 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Features.View.ViewProperty"
+        <activity android:name=".Features.View.AddParticulars"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+        <activity
+            android:name=".Features.View.AddProperty"
             android:screenOrientation="portrait"></activity>
-
-
+        <activity
+            android:name=".Features.View.ViewProperty"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Features.View.SplashScreen"
             android:screenOrientation="portrait">
@@ -28,17 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".Features.View.MainActivity"
-            android:screenOrientation="portrait"></activity>
-
-
-
-
-
-        <!-- Reminder receiver service -->
+            android:screenOrientation="portrait" /> <!-- Reminder receiver service -->
         <receiver
             android:name=".Services.ReminderReceiver"
             android:enabled="true"

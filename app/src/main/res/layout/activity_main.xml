@@ -26,7 +26,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/navigationHeadColor"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                    android:theme="@style/overFlowMenuTheme"
+                    app:popupTheme="@style/popupStyle">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

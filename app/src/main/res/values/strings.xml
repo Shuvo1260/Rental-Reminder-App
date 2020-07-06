@@ -26,6 +26,7 @@
     <string name="currentTenantPhone">Mobile number</string>
     <string name="totalDebit">Total debit:</string>
     <string name="totalCredit">Total credit:</string>
+    <string name="comment">Comment</string>
 
     <!--    Particular Items-->
     <string name="dateTitle">Date:</string>

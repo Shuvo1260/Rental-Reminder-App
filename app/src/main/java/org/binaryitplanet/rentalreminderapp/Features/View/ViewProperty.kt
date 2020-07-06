@@ -2,6 +2,7 @@ package org.binaryitplanet.rentalreminderapp.Features.View
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
 
 class ViewProperty : AppCompatActivity() {
@@ -17,10 +19,15 @@ class ViewProperty : AppCompatActivity() {
 
     private lateinit var binding: ActivityViewPropertyBinding
 
+    private lateinit var tenantUtils: TenantUtils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_property)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.enterTransition = null
+        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view_property)
 
@@ -38,6 +45,27 @@ class ViewProperty : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
+
+        setViews()
+    }
+
+    private fun setViews() {
+        binding.navigationTitle.text = tenantUtils.buildingName
+        binding.currentTenantName.text = tenantUtils.tenantName
+        binding.currentTenantPhone.text = tenantUtils.phoneNumber
+        binding.totalDebit.text = tenantUtils.totalDebit.toString()
+        binding.totalCredit.text = tenantUtils.totalCredit.toString()
+        binding.idProof.text = tenantUtils.idProof
+
+        if (tenantUtils.propertyStatus)
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+        else
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
     }
 
     private fun leave() {

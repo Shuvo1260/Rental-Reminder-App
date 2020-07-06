@@ -5,6 +5,7 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="navigationHeadColor">#2D3742</color>
+    <color name="fabColor">#3B4653</color>
     <color name="green">#00FF0A</color>
     <color name="red">#FF1100</color>
     <color name="mtrl_textinput_default_box_stroke_color">#fff</color>

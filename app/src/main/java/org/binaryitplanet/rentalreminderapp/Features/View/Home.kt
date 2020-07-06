@@ -2,15 +2,22 @@ package org.binaryitplanet.rentalreminderapp.Features.View
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.binaryitplanet.rentalreminderapp.Features.Adapter.PropertyListAdapter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
+import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.FragmentHomeBinding
 
 
-class Home : Fragment() {
+class Home : Fragment(), PropertyView {
 
     private val TAG = "Home"
 
@@ -30,6 +37,30 @@ class Home : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchData()
+    }
+
+    private fun fetchData() {
+        val tenantPresenterIml = TenantPresenterIml(context!!, this)
+        tenantPresenterIml.fetchData(true)
+    }
+
+
+    override fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {
+        super.onPropertyFetchSuccess(tenantList)
+        Log.d(TAG, "TenantList: $tenantList")
+        val propertyListAdapter = PropertyListAdapter(
+            context!!,
+            tenantList as ArrayList<TenantUtils>
+        )
+
+        binding.list.adapter = propertyListAdapter
+        binding.list.layoutManager = LinearLayoutManager(context)
+        binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
     }
 
 }

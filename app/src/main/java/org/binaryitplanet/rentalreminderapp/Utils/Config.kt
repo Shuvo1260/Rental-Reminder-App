@@ -16,16 +16,16 @@ class Config {
         val LAST_RANT_EMPTY_MESSAGE = "No rant received yet"
         val LAST_RANT_MESSAGE = "Last rant received"
         val PREVIOUS_TENANT_TITLE = "Previous tenant name"
-            val LEAVING_TENANT_TITLE = "Leaving tenant"
-            val LEAVING_TENANT_MESSAGE = "Are you sure the tenant is leaving?"
-            val YES_MESSAGE = "Yes"
-            val NO_MESSAGE = "No"
+        val LEAVING_TENANT_TITLE = "Leaving tenant"
+        val LEAVING_TENANT_MESSAGE = "Are you sure the tenant is leaving?"
+        val YES_MESSAGE = "Yes"
+        val NO_MESSAGE = "No"
 
-            val PROPERTY_STATUS_OCCUPIED = "Occupied"
-            val PROPERTY_STATUS_UNOCCUPIED = "Unoccupied"
+        val PROPERTY_STATUS_OCCUPIED = "Occupied"
+        val PROPERTY_STATUS_UNOCCUPIED = "Unoccupied"
 
 //        Intent
-            val PROPERTY_INFORMATION = "PropertyInformation"
+        val PROPERTY_INFORMATION = "PropertyInformation"
 //        Error
         val ERROR_INVALID_MESSAGE = "Inavlid value"
 
@@ -45,6 +45,7 @@ class Config {
 //        Database
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "Rental_Reminder"
+        const val DATABASE_NAME_WITH_FORMAT = "Rental_Reminder.db"
         const val TABLE_NAME_TENANT = "Tenants"
         const val TABLE_NAME_REMINDER = "Reminders"
         const val TABLE_NAME_PARTICULAS = "Particulars"
@@ -68,5 +69,10 @@ class Config {
         const val COLUMN_TOTAL_DEBIT = "Total_debit"
         const val COLUMN_TOTAL_CREDIT = "Total_credit"
         const val COLUMN_LAST_RANT_RECEIVED = "Last_Rant"
+
+//        Backup And Restore section
+        const val SD_CARD_PATH = "/sdcard/"
+        const val BACKUP_REQUEST_CODE = 0
+        const val RESTORE_REQUEST_CODE = 1
     }
 }

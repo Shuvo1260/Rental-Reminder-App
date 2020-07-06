@@ -5,6 +5,9 @@
     <string name="splashScreenSubTitle">Tradinget</string>
 
     <string name="logoContentDescription">Logo</string>
+    <string name="backUpMessage">Backup your data to keep safe</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
 
 
     <!--    Hints-->

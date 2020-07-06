@@ -11,10 +11,6 @@ class ReminderManager(
 
     private var REMINDER_REQUEST_CODE: Int = 0
 
-    private lateinit var startDate: ArrayList<Int>
-    private lateinit var endDate: ArrayList<Int>
-    private lateinit var time: ArrayList<Int>
-    private var interval: Int = 0
 
 //    private lateinit var startCalendar: Calendar
 //    private lateinit var endCalendar: Calendar

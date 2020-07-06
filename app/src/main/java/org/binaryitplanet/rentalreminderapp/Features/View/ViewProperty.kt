@@ -46,6 +46,7 @@ class ViewProperty : AppCompatActivity(), PropertyView {
 
         binding.add.setOnClickListener {
             val intent = Intent(applicationContext, AddParticulars::class.java)
+            intent.putExtra(Config.PROPERTY_INFORMATION, tenantUtils)
             startActivity(intent)
             overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
         }

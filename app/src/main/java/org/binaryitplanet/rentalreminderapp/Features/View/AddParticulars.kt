@@ -1,22 +1,28 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
+import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityAddParticularsBinding
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityAddPropertyBinding
+import java.util.*
 
-class AddParticulars : AppCompatActivity() {
+class AddParticulars : AppCompatActivity(), ParticularView {
 
 
-    private val TAG = "AddPerticular"
+    private val TAG = "AddParticular"
 
     private lateinit var binding: ActivityAddParticularsBinding
 
@@ -24,6 +30,8 @@ class AddParticulars : AppCompatActivity() {
     private var year: String? = null
     private var transactionType: String? = null
     private var amount: String? = null
+
+    private lateinit var tenantUtils: TenantUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,14 +82,57 @@ class AddParticulars : AppCompatActivity() {
     private fun saveData() {
         Log.d(TAG, "Saving Data")
         if(checkValidity()){
-//            val particularUtils = ParticularUtils(
-//                null,
-//
-//            )
-            onBackPressed()
+            tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
+            val date = getCurrentDate()
+            val particularUtils = ParticularUtils(
+                null,
+                tenantUtils.id!!,
+                transactionType!!,
+                amount = amount?.toInt()!!,
+                date = date,
+                month = month!!,
+                year = year?.toInt()!!
+            )
+            val particularPresenter = ParticularPresenterIml(
+                this,
+                this
+            )
+            particularPresenter.saveData(
+                tenantUtils,
+                particularUtils
+            )
         }
     }
 
+    private fun getCurrentDate(): String {
+        val calendar = Calendar.getInstance()
+        val date = calendar.get(Calendar.DAY_OF_MONTH).toString() + "/" +
+                (calendar.get(Calendar.MONTH)+1) + "/" +
+                calendar.get(Calendar.YEAR)
+
+        Log.d(TAG, "Date: $date")
+        return date
+    }
+
+    override fun onPerticularAdd(status: Boolean) {
+        super.onPerticularAdd(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    // Checking validity
     private fun checkValidity(): Boolean {
         transactionType = binding.type.text.toString()
         amount = binding.amount.text.toString()

@@ -30,6 +30,7 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     private var year: String? = null
     private var transactionType: String? = null
     private var amount: String? = null
+    private var remark: String? = null
 
     private lateinit var tenantUtils: TenantUtils
 
@@ -91,7 +92,8 @@ class AddParticulars : AppCompatActivity(), ParticularView {
                 amount = amount?.toInt()!!,
                 date = date,
                 month = month!!,
-                year = year?.toInt()!!
+                year = year?.toInt()!!,
+                remark = remark!!
             )
             val particularPresenter = ParticularPresenterIml(
                 this,
@@ -138,6 +140,7 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         amount = binding.amount.text.toString()
         month = binding.month.text.toString()
         year = binding.year.text.toString()
+        remark = binding.remark.text.toString()
 
         if (transactionType.isNullOrEmpty()) {
             binding.type.error = Config.ERROR_INVALID_MESSAGE

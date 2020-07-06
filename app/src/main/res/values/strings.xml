@@ -13,6 +13,7 @@
     <string name="tenantName">Tenant name</string>
     <string name="phoneNumber">Phone number</string>
     <string name="idProof">ID proof</string>
+    <string name="remark">Remark</string>
 
     <!--    Home-->
     <string name="totalRantOfThisMonth">Total rant received this month</string>

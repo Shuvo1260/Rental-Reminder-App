@@ -11,13 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.binaryitplanet.rentalreminderapp.Features.Adapter.ParticularListAdapter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
 
-class ViewProperty : AppCompatActivity(), PropertyView {
+class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
 
     private val TAG = "ViewProperty"
 
@@ -55,8 +59,37 @@ class ViewProperty : AppCompatActivity(), PropertyView {
     override fun onResume() {
         super.onResume()
         tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
+        fetchData(tenantUtils.id)
+    }
 
+    private fun fetchData(id: Long?) {
+
+        val tenantPresenterIml = TenantPresenterIml(this, this)
+        tenantPresenterIml.fetchDataById(id!!)
+    }
+
+    override fun onTenantFetchSuccess(tenantUtils: TenantUtils) {
+        super.onTenantFetchSuccess(tenantUtils)
+        this.tenantUtils = tenantUtils
         setViews()
+        val particularPresenter = ParticularPresenterIml(
+            this,
+            this
+        )
+        particularPresenter.fetchData(tenantUtils.id!!)
+    }
+
+    override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
+        super.onPerticularFetchSuccess(particularList)
+        Log.d(TAG, "ParticularList: $particularList")
+
+        val particularAdapter = ParticularListAdapter(
+            this,
+            particularList as ArrayList<ParticularUtils>
+        )
+        binding.list.adapter = particularAdapter
+        binding.list.layoutManager = LinearLayoutManager(this)
+        binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
     }
 
     // Setting views

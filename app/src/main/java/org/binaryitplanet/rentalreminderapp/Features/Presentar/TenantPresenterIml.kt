@@ -80,4 +80,17 @@ class TenantPresenterIml(
         }
     }
 
+    override fun fetchDataById(id: Long) {
+        super.fetchDataById(id)
+        try {
+            val databaseManager = DatabaseManager.getInstance(context)
+
+            view?.onTenantFetchSuccess(
+                databaseManager?.getTenantDAO()?.getTenantById(id)!!
+            )
+        }catch (e: Exception) {
+            Log.d(TAG, "TenantFetchException: ${e.message}")
+        }
+    }
+
 }

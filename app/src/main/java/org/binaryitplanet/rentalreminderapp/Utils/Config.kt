@@ -57,6 +57,7 @@ class Config {
         const val COLUMN_YEAR = "Year"
         const val COLUMN_DATE = "Date"
         const val COLUMN_AMOUNT = "Amount"
+        const val COLUMN_REMARK = "Remark"
         const val COLUMN_COMMENT = "Comment"
         const val COLUMN_BUILDING_NAME = "Building_Name"
         const val COLUMN_TENANT_NAME = "Tenant_Name"

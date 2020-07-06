@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.binaryitplanet.rentalreminderapp.Features.Adapter.ParticularListAdapter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewOldPropertyBinding
 
-class ViewOldProperty : AppCompatActivity() {
+class ViewOldProperty : AppCompatActivity(), ParticularView {
 
     private val TAG = "ViewProperty"
 
@@ -39,7 +43,26 @@ class ViewOldProperty : AppCompatActivity() {
         tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
 
         setViews()
+        val particularPresenter = ParticularPresenterIml(
+            this,
+            this
+        )
+        particularPresenter.fetchData(tenantUtils.id!!)
     }
+
+    override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
+        super.onPerticularFetchSuccess(particularList)
+        Log.d(TAG, "ParticularList: $particularList")
+
+        val particularAdapter = ParticularListAdapter(
+            this,
+            particularList as ArrayList<ParticularUtils>
+        )
+        binding.list.adapter = particularAdapter
+        binding.list.layoutManager = LinearLayoutManager(this)
+        binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
+    }
+
 
     // Setting views
     private fun setViews() {

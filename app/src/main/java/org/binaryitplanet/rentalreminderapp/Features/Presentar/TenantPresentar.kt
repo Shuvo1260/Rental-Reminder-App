@@ -6,6 +6,7 @@ interface TenantPresentar {
     fun fetchData(propertyStatus: Boolean){}
     fun saveData(tenantUtils: TenantUtils){}
     fun updateData(tenantUtils: TenantUtils){}
+    fun fetchDataById(id: Long){}
 
     fun buildingList(){}
 }

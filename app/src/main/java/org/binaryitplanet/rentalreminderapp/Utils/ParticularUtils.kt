@@ -28,6 +28,9 @@ data class ParticularUtils(
     val year: Int,
 
     @ColumnInfo(name = Config.COLUMN_AMOUNT)
-    val amount: Int
+    val amount: Int,
+
+    @ColumnInfo(name = Config.COLUMN_REMARK)
+    val remark: String
 ): Serializable {
 }

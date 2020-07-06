@@ -112,6 +112,24 @@ tools:context=".Features.View.AddParticulars">
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/remark"
+            android:textColorHint="@color/colorAccent"
+            app:boxStrokeColor="@color/white"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="text"
+                android:maxHeight="@dimen/_200sdp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

@@ -17,7 +17,16 @@ class ParticularPresenterIml(
     private val TAG = "ParticularPresenter"
 
     override fun fetchData(userId: Long) {
-        //
+
+        try {
+            val databaseManager = DatabaseManager.getInstance(context)
+
+            view?.onPerticularFetchSuccess(
+                databaseManager?.getParticularDAO()?.getParticularsByUserId(userId)!!
+            )
+        }catch (e: Exception) {
+            Log.d(TAG, "ParticularFetchException: ${e.message}")
+        }
     }
 
     override fun saveData(tenantUtils: TenantUtils, particularUtils: ParticularUtils) {

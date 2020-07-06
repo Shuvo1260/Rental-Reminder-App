@@ -6,4 +6,5 @@ interface PropertyView {
     fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {}
     fun onPropertyAdd(status: Boolean){}
     fun onPropertyUpdate(status: Boolean){}
+    fun onBuildingListFetchSuccess(buildinList: List<String>){}
 }

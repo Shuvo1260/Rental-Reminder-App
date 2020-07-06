@@ -31,7 +31,7 @@ tools:context=".Features.View.AddParticulars">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/transactionType"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/colorAccent"
             android:layout_marginTop="@dimen/_30sdp"
             app:boxStrokeColor="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -41,6 +41,7 @@ tools:context=".Features.View.AddParticulars">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:inputType="none"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +50,7 @@ tools:context=".Features.View.AddParticulars">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/amount"
-            android:textColorHint="@color/colorPrimary"
+            android:textColorHint="@color/colorAccent"
             app:boxStrokeColor="@color/white"
             android:layout_marginTop="@dimen/_10sdp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -76,7 +77,7 @@ tools:context=".Features.View.AddParticulars">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/month"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorAccent"
                 app:boxStrokeColor="@color/white"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/_5sdp"
@@ -88,6 +89,7 @@ tools:context=".Features.View.AddParticulars">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:inputType="none"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +97,7 @@ tools:context=".Features.View.AddParticulars">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/year"
-                android:textColorHint="@color/colorPrimary"
+                android:textColorHint="@color/colorAccent"
                 app:boxStrokeColor="@color/white"
                 android:layout_weight="1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -105,7 +107,7 @@ tools:context=".Features.View.AddParticulars">
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:inputType="numberDecimal"
+                    android:inputType="none"
                     />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

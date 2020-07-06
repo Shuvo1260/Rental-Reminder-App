@@ -1,19 +1,23 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
 
-class ViewProperty : AppCompatActivity() {
+class ViewProperty : AppCompatActivity(), PropertyView {
 
     private val TAG = "ViewProperty"
 
@@ -54,6 +58,7 @@ class ViewProperty : AppCompatActivity() {
         setViews()
     }
 
+    // Setting views
     private fun setViews() {
         binding.navigationTitle.text = tenantUtils.buildingName
         binding.currentTenantName.text = tenantUtils.tenantName
@@ -70,6 +75,53 @@ class ViewProperty : AppCompatActivity() {
 
     private fun leave() {
         Log.d(TAG, "Leaving ")
+
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(Config.LEAVING_TENANT_TITLE)
+        builder.setMessage(Config.LEAVING_TENANT_MESSAGE)
+
+        builder.setIcon(R.drawable.ic_launcher)
+
+        builder.setPositiveButton(
+            Config.YES_MESSAGE
+        ){
+            dialog: DialogInterface?, which: Int ->
+
+            tenantUtils.propertyStatus = false
+
+            val presenter = TenantPresenterIml(this, this)
+            presenter.updateData(tenantUtils)
+        }
+
+        builder.setNegativeButton(
+            Config.NO_MESSAGE
+        ){
+            dialog: DialogInterface?, which: Int ->
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+    }
+
+    // Marking as old tenant
+    override fun onPropertyUpdate(status: Boolean) {
+        super.onPropertyUpdate(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 

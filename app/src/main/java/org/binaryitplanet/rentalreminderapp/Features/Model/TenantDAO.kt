@@ -23,6 +23,9 @@ interface TenantDAO {
     @Query("SELECT * FROM Tenants ORDER BY Building_Name ASC")
     fun getAllTenants(): List<TenantUtils>
 
+    @Query("SELECT DISTINCT Building_Name FROM Tenants ORDER BY Building_Name ASC")
+    fun getAllBuildings(): List<String>
+
 
     @Query("SELECT * FROM Tenants WHERE Property_Status == :propertyStatus ORDER BY Building_Name ASC")
     fun getAllTenantsByType(propertyStatus: Boolean): List<TenantUtils>

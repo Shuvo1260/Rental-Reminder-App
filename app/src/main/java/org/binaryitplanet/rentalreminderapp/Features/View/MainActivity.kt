@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import org.binaryitplanet.rentalreminderapp.R
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             setUpToolbarTitle(Config.TOOLBAR_TITLE_OLD_TENANT)
             fragmentTransition.replace(
                 R.id.frameLayout,
-                OldTrenant(),
+                OldTenant(),
                 Config.TOOLBAR_TITLE_OLD_TENANT
             )
 

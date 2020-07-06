@@ -28,8 +28,6 @@ class TenantPresenterIml(
             )
         }catch (e: Exception) {
             Log.d(TAG, "PropertyFetchingException: ${e.message}")
-
-            view?.onPropertyAdd(false)
         }
 
     }
@@ -60,11 +58,26 @@ class TenantPresenterIml(
 
             databaseManager?.getTenantDAO()?.update(tenantUtils)
 
-            view?.onPropertyAdd(true)
+            view?.onPropertyUpdate(true)
         }catch (e: Exception) {
             Log.d(TAG, "PropertyUpdatingException: ${e.message}")
 
-            view?.onPropertyAdd(false)
+            view?.onPropertyUpdate(false)
         }
     }
+
+    override fun buildingList() {
+        super.buildingList()
+
+        try {
+            val databaseManager = DatabaseManager.getInstance(context)
+
+            view?.onBuildingListFetchSuccess(
+                databaseManager?.getTenantDAO()?.getAllBuildings()!!
+            )
+        }catch (e: Exception) {
+            Log.d(TAG, "BuildingFetchException: ${e.message}")
+        }
+    }
+
 }

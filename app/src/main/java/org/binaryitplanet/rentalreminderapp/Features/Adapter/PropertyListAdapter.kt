@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_property_list_item.view.*
+import org.binaryitplanet.rentalreminderapp.Features.View.ViewOldProperty
 import org.binaryitplanet.rentalreminderapp.Features.View.ViewProperty
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
@@ -61,7 +62,10 @@ class PropertyListAdapter(
         view.setOnClickListener {
             Log.d(TAG, "PropertyClicked: $position")
 
-            val intent = Intent(context, ViewProperty::class.java)
+            var intent = Intent(context, ViewProperty::class.java)
+
+            if (!tenantList[position].propertyStatus)
+                intent = Intent(context, ViewOldProperty::class.java)
 
             // Passing selected item data
             intent.putExtra(Config.PROPERTY_INFORMATION, tenantList[position])

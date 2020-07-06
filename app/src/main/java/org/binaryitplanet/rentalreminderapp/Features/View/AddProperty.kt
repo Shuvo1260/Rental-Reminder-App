@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
@@ -42,6 +43,10 @@ class AddProperty : AppCompatActivity(), PropertyView {
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
+
+
+        val tenantPresenterIml = TenantPresenterIml(this, this)
+        tenantPresenterIml.buildingList()
     }
 
     // Checking input field validity
@@ -119,6 +124,18 @@ class AddProperty : AppCompatActivity(), PropertyView {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    override fun onBuildingListFetchSuccess(buildinList: List<String>) {
+        super.onBuildingListFetchSuccess(buildinList)
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            buildinList
+        )
+
+        binding.buildingName.setAdapter(adapter)
     }
 
 

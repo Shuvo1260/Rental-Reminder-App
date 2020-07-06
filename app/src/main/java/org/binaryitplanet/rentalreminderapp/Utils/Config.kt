@@ -16,6 +16,10 @@ class Config {
         val LAST_RANT_EMPTY_MESSAGE = "No rant received yet"
         val LAST_RANT_MESSAGE = "Last rant received"
         val PREVIOUS_TENANT_TITLE = "Previous tenant name"
+            val LEAVING_TENANT_TITLE = "Leaving tenant"
+            val LEAVING_TENANT_MESSAGE = "Are you sure the tenant is leaving?"
+            val YES_MESSAGE = "Yes"
+            val NO_MESSAGE = "No"
 
             val PROPERTY_STATUS_OCCUPIED = "Occupied"
             val PROPERTY_STATUS_UNOCCUPIED = "Unoccupied"

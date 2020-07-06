@@ -8,5 +8,7 @@ interface TenantPresentar {
     fun updateData(tenantUtils: TenantUtils){}
     fun fetchDataById(id: Long){}
 
+    fun totalRantReceivedThisMonth(){}
+
     fun buildingList(){}
 }

@@ -47,6 +47,7 @@ class Home : Fragment(), PropertyView {
     private fun fetchData() {
         val tenantPresenterIml = TenantPresenterIml(context!!, this)
         tenantPresenterIml.fetchData(true)
+        tenantPresenterIml.totalRantReceivedThisMonth()
     }
 
 
@@ -61,6 +62,12 @@ class Home : Fragment(), PropertyView {
         binding.list.adapter = propertyListAdapter
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
+    }
+
+    override fun onTotalRantReceivedThisMonth(totalRant: Int) {
+        super.onTotalRantReceivedThisMonth(totalRant)
+        binding.amount.text = totalRant.toString() +
+                context?.resources?.getString(R.string.rupeeSign)
     }
 
 }

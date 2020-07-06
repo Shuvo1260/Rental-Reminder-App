@@ -56,7 +56,7 @@ class PropertyListAdapter(
         if (tenantList[position].lastRant.isNullOrEmpty())
             view.lastReceived.text = Config.LAST_RANT_EMPTY_MESSAGE
         else
-            view.lastReceived.text = Config.LAST_RANT_MESSAGE +
+            view.lastReceived.text = Config.LAST_RANT_MESSAGE + " " +
                     tenantList[position].lastRant
 
         view.setOnClickListener {

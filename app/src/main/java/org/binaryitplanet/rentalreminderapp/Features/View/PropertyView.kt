@@ -8,4 +8,6 @@ interface PropertyView {
     fun onPropertyUpdate(status: Boolean){}
     fun onBuildingListFetchSuccess(buildinList: List<String>){}
     fun onTenantFetchSuccess(tenantUtils: TenantUtils){}
+
+    fun onTotalRantReceivedThisMonth(totalRant: Int){}
 }

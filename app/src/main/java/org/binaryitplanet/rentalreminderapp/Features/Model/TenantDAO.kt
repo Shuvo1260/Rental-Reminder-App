@@ -30,5 +30,7 @@ interface TenantDAO {
     @Query("SELECT * FROM Tenants WHERE Property_Status == :propertyStatus ORDER BY Building_Name ASC")
     fun getAllTenantsByType(propertyStatus: Boolean): List<TenantUtils>
 
+    @Query("SELECT COUNT(ID) FROM Tenants WHERE Property_Status == :status")
+    fun countTotalPropertyByStatus(status: Boolean): Int
 
 }

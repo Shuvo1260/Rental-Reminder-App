@@ -10,14 +10,13 @@ import org.binaryitplanet.rentalreminderapp.Utils.ReminderUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 
 @Database(
-    entities = [TenantUtils::class, ReminderUtils::class, ParticularUtils::class],
+    entities = [TenantUtils::class, ParticularUtils::class],
     version = Config.DATABASE_VERSION
 )
 
 abstract class DatabaseManager: RoomDatabase() {
 
     abstract fun getTenantDAO() : TenantDAO
-    abstract fun getReminderDAO(): ReminderDAO
     abstract fun getParticularDAO(): ParticularDAO
 
     companion object{

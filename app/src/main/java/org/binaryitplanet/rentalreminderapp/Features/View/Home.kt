@@ -1,5 +1,6 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.PropertyListAdapter
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
+import org.binaryitplanet.rentalreminderapp.Services.ReminderManager
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.ReminderUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.FragmentHomeBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Home : Fragment(), PropertyView {
@@ -62,6 +67,49 @@ class Home : Fragment(), PropertyView {
         binding.list.adapter = propertyListAdapter
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
+
+        if (tenantList.isNotEmpty())
+            checkReminder()
+    }
+
+    private fun checkReminder() {
+        val sharedPreferences = context?.getSharedPreferences(
+            Config.SHARED_PREFERENCE,
+            Context.MODE_PRIVATE
+        )
+        val firstReminder = sharedPreferences!!.getBoolean(
+            Config.FIRST_REMINDER,
+            false
+        )
+        if (!firstReminder){
+
+            setFirstReminder()
+
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(Config.FIRST_REMINDER, true)
+            editor.apply()
+            editor.commit()
+        }
+    }
+
+    private fun setFirstReminder() {
+        Log.d(TAG, "FirstReminderSetup")
+        val day = 7
+        var month = Calendar.getInstance().get(Calendar.MONTH)
+        var year = Calendar.getInstance().get(Calendar.YEAR)
+
+        if (month == 11) {
+            month = 0
+            year++
+        }
+        else
+            month++
+
+        val reminderUtils = ReminderUtils(day, month, year)
+        val reminderManager = ReminderManager(context!!, reminderUtils)
+        reminderManager.create()
+        reminderManager.setReminder()
+
     }
 
     override fun onTotalRantReceivedThisMonth(totalRant: Int) {

@@ -10,6 +10,8 @@ class Config {
         val TOOLBAR_TITLE_ADD_PROPERTY = "Add property"
         val TOOLBAR_TITLE_ADD_PARTICULAR= "Add particular"
         val LIST_CACHED_SIZE = 1000
+        val SHARED_PREFERENCE = "SharedPreference"
+        val FIRST_REMINDER = "FirstReminder"
 
         val SUCCESS_MESSAGE = "Success"
         val FAILED_MESSAGE  = "Failed"
@@ -35,6 +37,8 @@ class Config {
         val REMINDER_NAME = "ReminderName"
         val PENDING_REMINDER_CODE = "PendingReminderCode"
         val PENDING_REMINDER = "PendingReminder"
+        val REMINDER_TITLE = "You haven't received all of your rants. "
+        val REMINDER_MESSAGE = "Please check your property list and see who hasn't given you rant."
 
 //        Notification Section
         val NOTIFICATION_BUNDLE = "NotificationBundle"

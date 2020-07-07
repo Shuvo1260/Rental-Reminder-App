@@ -29,4 +29,7 @@ interface ParticularDAO {
     fun getSumOfCreditDebitByMonth(month: String, year: Int, type: String, userId: Long): Int
 
 
+    @Query("SELECT COUNT(ID) FROM Particulars WHERE Month == :month AND Year == :year AND Transaction_type == :type")
+    fun countTotalParticularByStatus(month: String, year: Int, type: String): Int
+
 }

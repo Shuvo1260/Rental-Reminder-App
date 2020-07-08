@@ -59,7 +59,8 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
                 overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
             } else {
                 val intent = Intent(applicationContext, AddParticulars::class.java)
-                intent.putExtra(Config.PROPERTY_INFORMATION, tenantUtils)
+                intent.putExtra(Config.PROPERTY_INFORMATION, propertyUtils)
+                intent.putExtra(Config.TENANT_INFORMATION, tenantUtils)
                 startActivity(intent)
                 overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
             }
@@ -98,6 +99,8 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
         super.onTenantFetchSuccessByBuildingId(tenant)
         tenantUtils = tenant
         setViews()
+        val particularPresenterIml = ParticularPresenterIml(this, this)
+        particularPresenterIml.fetchData(tenantUtils!!.id!!)
     }
 
 

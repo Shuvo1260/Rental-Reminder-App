@@ -30,6 +30,7 @@ class Config {
 
 //        Intent
         val PROPERTY_INFORMATION = "PropertyInformation"
+        val TENANT_INFORMATION = "TenantInformation"
 //        Error
         val ERROR_INVALID_MESSAGE = "Inavlid value"
 

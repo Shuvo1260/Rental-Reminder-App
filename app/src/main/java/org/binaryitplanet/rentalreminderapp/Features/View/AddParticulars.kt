@@ -16,6 +16,7 @@ import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresent
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityAddParticularsBinding
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityAddPropertyBinding
@@ -129,24 +130,29 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     private fun saveData() {
         Log.d(TAG, "Saving Data")
         if(checkValidity()){
-            tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
+            tenantUtils = intent.getSerializableExtra(Config.TENANT_INFORMATION) as TenantUtils
+            var propertyUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as PropertyUtils
+
 
             val particularUtils = ParticularUtils(
                 null,
                 tenantUtils.id!!,
                 transactionType!!,
-                "",
+                paymentType!!,
                 amount = amount?.toInt()!!,
                 date = issueDate!!,
                 month = month!!,
                 year = year?.toInt()!!,
                 remark = remark!!
             )
+            Log.d(TAG, "Utils: $propertyUtils, $tenantUtils and $particularUtils")
+
             val particularPresenter = ParticularPresenterIml(
                 this,
                 this
             )
             particularPresenter.saveData(
+                propertyUtils,
                 tenantUtils,
                 particularUtils
             )

@@ -15,9 +15,9 @@ interface ParticularDAO {
 
     @Delete
     fun delete(particular: ParticularUtils)
-//
-//    @Query("SELECT * FROM Particulars WHERE User_ID == :userId ORDER BY ID DESC")
-//    fun getParticularsByUserId(userId: Long): List<ParticularUtils>
+
+    @Query("SELECT * FROM Particulars WHERE Tenant_ID == :tenantId ORDER BY ID DESC")
+    fun getParticularsByUserId(tenantId: Long): List<ParticularUtils>
 //
 //
 //    @Query("SELECT * FROM Particulars")

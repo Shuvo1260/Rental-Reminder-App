@@ -24,7 +24,7 @@ class Config {
         val LEAVING_TENANT_TITLE = "Leaving tenant"
         val DELETE_TENANT_TITLE = "Delete tenant"
         val LEAVING_TENANT_MESSAGE = "Are you sure the tenant is leaving?"
-        val DELETE_TENANT_MESSAGE = "Do you want to delete tenant permanently?"
+        val DELETE_TENANT_MESSAGE = "Do you want to delete the tenant permanently?"
         val YES_MESSAGE = "Yes"
         val NO_MESSAGE = "No"
 

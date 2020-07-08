@@ -116,7 +116,8 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
 
         val particularAdapter = ParticularListAdapter(
             this,
-            particularList as ArrayList<ParticularUtils>
+            particularList as ArrayList<ParticularUtils>,
+            true
         )
         binding.list.adapter = particularAdapter
         binding.list.layoutManager = LinearLayoutManager(this)

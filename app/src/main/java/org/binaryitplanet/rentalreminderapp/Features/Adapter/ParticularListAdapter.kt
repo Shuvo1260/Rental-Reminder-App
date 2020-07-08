@@ -12,7 +12,8 @@ import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
 
 class ParticularListAdapter(
     val context: Context,
-    val particularList: ArrayList<ParticularUtils>
+    val particularList: ArrayList<ParticularUtils>,
+    val isNew: Boolean
 ):  RecyclerView.Adapter<ParticularListAdapter.ViewHolder>() {
 
 

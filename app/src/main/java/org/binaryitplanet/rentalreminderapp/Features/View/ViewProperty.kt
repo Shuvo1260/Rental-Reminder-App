@@ -115,7 +115,8 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
 
         val particularAdapter = ParticularListAdapter(
             this,
-            particularList as ArrayList<ParticularUtils>
+            particularList as ArrayList<ParticularUtils>,
+            false
         )
         binding.list.adapter = particularAdapter
         binding.list.layoutManager = LinearLayoutManager(this)

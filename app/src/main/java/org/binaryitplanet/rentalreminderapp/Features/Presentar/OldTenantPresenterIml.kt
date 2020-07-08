@@ -81,6 +81,31 @@ class OldTenantPresenterIml(
         }
     }
 
+    override fun deleteParmanentData(oldTenantUtils: OldTenantUtils) {
+        super.deleteParmanentData(oldTenantUtils)
+        try {
+
+
+
+
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+
+            databaseManager
+                .getOldTenantDAO()
+                .delete(oldTenantUtils)
+
+
+            view?.onDeleteOldTenant(true)
+            Log.d(TAG, "DeletingOldTenantData:  $oldTenantUtils")
+
+        }catch (e: Exception) {
+            Log.d(TAG, "OldTenantDeleteException: ${e.message}")
+
+            view?.onDeleteOldTenant(false)
+        }
+    }
+
     override fun saveData(oldTenantUtils: OldTenantUtils) {
         super.saveData(oldTenantUtils)
 

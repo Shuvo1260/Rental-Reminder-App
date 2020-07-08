@@ -33,6 +33,7 @@ tools:context=".Features.View.ViewOldProperty">
                 android:layout_height="wrap_content"
                 tools:text="ABC Building"
                 android:textColor="#FFFFFF"
+                android:gravity="center"
                 style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:transitionName="@string/buildingNameTransition"
                 />
@@ -44,12 +45,12 @@ tools:context=".Features.View.ViewOldProperty">
         android:id="@+id/currentTenantName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_12sdp"
         android:transitionName="@string/tenantNameTransition"
-        app:layout_constraintEnd_toStartOf="@+id/currentTenantPhone"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:text="@string/currentTenantName" />
@@ -75,21 +76,9 @@ tools:context=".Features.View.ViewOldProperty">
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_12sdp"
         android:transitionName="@string/mobileNumberTransition"
-        app:layout_constraintBottom_toBottomOf="@+id/currentTenantName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/currentTenantName" />
+        app:layout_constraintTop_toBottomOf="@+id/currentTenantName" />
 
-    <TextView
-        android:id="@+id/propertyStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:textSize="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentTenantPhone"
-        tools:text="active" />
 
 
     <TextView
@@ -133,12 +122,12 @@ tools:context=".Features.View.ViewOldProperty">
         android:id="@+id/totalDebit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/currentTenantPhone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/propertyStatus"
         tools:text="500" />
 
 

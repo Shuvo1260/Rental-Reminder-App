@@ -8,11 +8,5 @@ interface OldTenantPresentar {
     fun fetchData(){}
     fun saveData(oldTenantUtils: OldTenantUtils){}
     fun deleteData(oldTenantUtils: OldTenantUtils, propertyUtils: PropertyUtils, tenantUtils: TenantUtils){}
-    fun updateData(tenantUtils: TenantUtils){}
-    fun fetchDataById(id: Long){}
-    fun fetchDataByBuildingId(id: Long){}
-
-    fun totalRantReceivedThisMonth(){}
-
-    fun buildingList(){}
+    fun deleteParmanentData(oldTenantUtils: OldTenantUtils){}
 }

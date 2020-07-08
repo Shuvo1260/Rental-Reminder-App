@@ -34,7 +34,6 @@ class PropertyPresenterIml(
             Log.d(TAG, "PropertyFetchingSuccess: ")
         }catch (e: Exception) {
             Log.d(TAG, "PropertyFetchingError: ${e.message}")
-            view?.onPropertyAdd(false)
         }
     }
 
@@ -58,7 +57,21 @@ class PropertyPresenterIml(
     }
 
     override fun fetchDataById(id: Long) {
-        //
+        try{
+            var databaseManager = DatabaseManager.getInstance(context)
+
+
+
+            view?.onPropertyFetchSuccessById(
+                databaseManager
+                    ?.getPropertyDAO()
+                    ?.getPropertyById(id)!!
+            )
+
+            Log.d(TAG, "PropertyFetchingSuccess: ")
+        }catch (e: Exception) {
+            Log.d(TAG, "PropertyFetchingError: ${e.message}")
+        }
     }
 
     override fun totalRantReceivedThisMonth() {

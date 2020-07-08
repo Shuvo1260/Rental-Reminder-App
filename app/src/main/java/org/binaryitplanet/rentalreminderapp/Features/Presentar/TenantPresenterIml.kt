@@ -4,15 +4,17 @@ import android.content.Context
 import android.util.Log
 import org.binaryitplanet.rentalreminderapp.Features.Model.DatabaseManager
 import org.binaryitplanet.rentalreminderapp.Features.View.PropertyView
+import org.binaryitplanet.rentalreminderapp.Features.View.TenantView
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import java.lang.Exception
 import java.util.*
 
 class TenantPresenterIml(
     private var context: Context,
-    private var view: PropertyView?
+    private var view: TenantView?
 ): TenantPresentar {
 
     private val TAG = "TenantPresenter"
@@ -35,21 +37,45 @@ class TenantPresenterIml(
 
     }
 
-    override fun saveData(tenantUtils: TenantUtils) {
-        super.saveData(tenantUtils)
-//
-//        try {
-//            Log.d(TAG, "SavingTenantData: $tenantUtils")
-//            val databaseManager = DatabaseManager.getInstance(context)
-//
-//            databaseManager?.getTenantDAO()?.insert(tenantUtils)
-//
-//            view?.onPropertyAdd(true)
-//        }catch (e: Exception) {
-//            Log.d(TAG, "PropertySavingException: ${e.message}")
-//
-//            view?.onPropertyAdd(false)
-//        }
+    override fun saveData(tenantUtils: TenantUtils, propertyUtils: PropertyUtils) {
+        super.saveData(tenantUtils, propertyUtils)
+
+        try {
+
+            Log.d(TAG, "SavingTenantData: $tenantUtils $propertyUtils")
+
+            propertyUtils.renewDate = getRenewDate(tenantUtils.joinDate)
+
+
+            Log.d(TAG, "SavingTenantData: $tenantUtils $propertyUtils")
+
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+            databaseManager
+                .getPropertyDAO()
+                .update(propertyUtils)
+            databaseManager
+                .getTenantDAO()
+                .insert(tenantUtils)
+
+
+            view?.onTenantAdd(true)
+        }catch (e: Exception) {
+            Log.d(TAG, "TenantSavingException: ${e.message}")
+
+            view?.onTenantAdd(false)
+        }
+    }
+
+    private fun getRenewDate(joinDate: String): String? {
+        var values = joinDate.split("/")
+        Log.d(TAG, "Split: $values")
+        var month = values[1].toInt() + 11
+        var year = values[2].toInt() + month / 12
+        month %= 12
+        Log.d(TAG, "Split: $month, $year")
+//        return "%02d/%02d/%04d".format(values[0], values[1], values[2])
+        return "%02d/%02d/%04d".format(values[0].toInt(), month, year)
     }
 
     override fun updateData(tenantUtils: TenantUtils) {
@@ -127,6 +153,20 @@ class TenantPresenterIml(
 //        }catch (e: Exception) {
 //            Log.d(TAG, "TenantFetchException: ${e.message}")
 //        }
+    }
+
+    override fun fetchDataByBuildingId(id: Long) {
+        super.fetchDataByBuildingId(id)
+        try{
+            val databaseManager = DatabaseManager.getInstance(context)!!
+            view?.onTenantFetchSuccessByBuildingId(
+                databaseManager
+                    .getTenantDAO()
+                    .getTenantByBuildingId(id)
+            )
+        }catch (e: Exception) {
+            Log.d(TAG, "TenantFetchingException: ${e.message}")
+        }
     }
 
 }

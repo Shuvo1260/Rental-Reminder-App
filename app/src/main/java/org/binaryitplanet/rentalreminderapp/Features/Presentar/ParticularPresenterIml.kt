@@ -40,9 +40,9 @@ class ParticularPresenterIml(
 //                tenantUtils.totalCredit += particularUtils.amount
 //            else
 //                tenantUtils.totalDebit += particularUtils.amount
-//
-//            tenantUtils.lastRant = particularUtils.month + ", " +
-//                    particularUtils.year
+////
+////            tenantUtils.lastRant = particularUtils.month + ", " +
+////                    particularUtils.year
 //
 //
 //            Log.d(TAG, "SavingParticularData: $tenantUtils and $particularUtils")

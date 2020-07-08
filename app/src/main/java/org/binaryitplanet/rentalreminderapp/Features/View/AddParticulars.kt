@@ -78,9 +78,9 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     }
 
     private fun setUpIssueDate() {
-        issueDate = "%02d/$02d/%04d".format(
+        issueDate = "%02d/%02d/%04d".format(
             issueDay,
-            issueMonth,
+            issueMonth+1,
             issueYear
         )
         binding.issueDate.text = issueDate

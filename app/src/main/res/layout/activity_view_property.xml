@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toStartOf="@+id/currentTenantPhone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            tools:text="@string/currentTenantName" />
+            android:text="@string/emptyTenant" />
 
         <TextView
             android:id="@+id/idProof"
@@ -64,14 +64,14 @@
             android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/currentTenantName"
-            tools:text="Id proof" />
+            android:text="@string/emptyIdProof" />
 
         <TextView
             android:id="@+id/currentTenantPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:text="9999999999999"
+            android:text="@string/emptyNumber"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/_12sdp"
             android:transitionName="@string/mobileNumberTransition"
@@ -115,7 +115,7 @@
             app:layout_constraintEnd_toStartOf="@+id/totalDebitTitle"
             app:layout_constraintStart_toEndOf="@+id/totalCreditTitle"
             app:layout_constraintTop_toTopOf="@+id/totalCreditTitle"
-            tools:text="5000" />
+            android:text="0" />
 
         <TextView
             android:id="@+id/totalDebitTitle"
@@ -139,7 +139,33 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/propertyStatus"
-            tools:text="500" />
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/addressTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addressTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalCreditTitle" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/addressTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addressTitle"
+            app:layout_constraintTop_toTopOf="@+id/addressTitle"
+            tools:text="Dhaka" />
 
 
         <TextView
@@ -150,11 +176,9 @@
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalCredit" />
+            app:layout_constraintTop_toBottomOf="@+id/addressTitle" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"

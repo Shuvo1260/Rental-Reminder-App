@@ -18,4 +18,7 @@ interface PropertyDAO {
 
     @Query("SELECT * FROM Property ORDER BY Building_Name ASC")
     fun getAllProperty(): List<PropertyUtils>
+
+    @Query("SELECT * FROM Property WHERE ID == :id")
+    fun getPropertyById(id: Long): PropertyUtils
 }

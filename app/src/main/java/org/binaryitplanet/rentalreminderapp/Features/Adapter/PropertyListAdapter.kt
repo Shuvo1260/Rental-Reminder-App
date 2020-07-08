@@ -75,9 +75,6 @@ class PropertyListAdapter(
 
             var intent = Intent(context, ViewProperty::class.java)
 
-            if (!propertyList[position].propertyStatus)
-                intent = Intent(context, ViewOldProperty::class.java)
-
             // Passing selected item data
             intent.putExtra(Config.PROPERTY_INFORMATION, propertyList[position])
 

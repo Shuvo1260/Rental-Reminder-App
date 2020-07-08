@@ -15,10 +15,10 @@ data class PropertyUtils(
     val buildingName: String,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
-    val tenantName: String?,
+    var tenantName: String?,
 
     @ColumnInfo(name = Config.COLUMN_PHONE_NUMBER)
-    val phoneNumber: String?,
+    var phoneNumber: String?,
 
     @ColumnInfo(name = Config.COLUMN_PROPERTY_STATUS)
     var propertyStatus: Boolean,

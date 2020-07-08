@@ -35,8 +35,8 @@ class OldTenant : Fragment(), PropertyView{
     }
 
     private fun fetchData() {
-        val tenantPresenterIml = TenantPresenterIml(context!!, this)
-        tenantPresenterIml.fetchData(false)
+//        val tenantPresenterIml = TenantPresenterIml(context!!, this)
+//        tenantPresenterIml.fetchData(false)
     }
 
 

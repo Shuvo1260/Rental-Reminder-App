@@ -14,20 +14,23 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.ParticularListAdapter
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.PropertyPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
 
-class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
+class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantView {
 
     private val TAG = "ViewProperty"
 
     private lateinit var binding: ActivityViewPropertyBinding
 
-    private lateinit var tenantUtils: TenantUtils
+    private var tenantUtils: TenantUtils? = null
+    private lateinit var propertyUtils: PropertyUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,35 +52,54 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
         }
 
         binding.add.setOnClickListener {
-            val intent = Intent(applicationContext, AddParticulars::class.java)
-            intent.putExtra(Config.PROPERTY_INFORMATION, tenantUtils)
-            startActivity(intent)
-            overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
+            if (tenantUtils == null) {
+                val intent = Intent(applicationContext, AddTenant::class.java)
+                intent.putExtra(Config.PROPERTY_INFORMATION, propertyUtils)
+                startActivity(intent)
+                overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
+            } else {
+                val intent = Intent(applicationContext, AddParticulars::class.java)
+                intent.putExtra(Config.PROPERTY_INFORMATION, tenantUtils)
+                startActivity(intent)
+                overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
-        fetchData(tenantUtils.id)
+        propertyUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as PropertyUtils
+        fetchPropertyData(propertyUtils.id)
     }
 
-    private fun fetchData(id: Long?) {
+    private fun fetchPropertyData(id: Long?) {
+        val propertyPresenterIml = PropertyPresenterIml(this, this)
+        propertyPresenterIml.fetchDataById(id!!)
+    }
+
+    override fun onPropertyFetchSuccessById(property: PropertyUtils) {
+        super.onPropertyFetchSuccessById(property)
+        propertyUtils = property
+        if (property.tenantName.isNullOrEmpty()) {
+            setPropertyViews()
+        } else {
+            fetchTenantData(property.id)
+        }
+    }
+
+
+    private fun fetchTenantData(id: Long?) {
 
         val tenantPresenterIml = TenantPresenterIml(this, this)
-        tenantPresenterIml.fetchDataById(id!!)
+        tenantPresenterIml.fetchDataByBuildingId(id!!)
     }
 
-//    override fun onTenantFetchSuccess(tenantUtils: TenantUtils) {
-//        super.onTenantFetchSuccess(tenantUtils)
-//        this.tenantUtils = tenantUtils
-//        setViews()
-//        val particularPresenter = ParticularPresenterIml(
-//            this,
-//            this
-//        )
-//        particularPresenter.fetchData(tenantUtils.id!!)
-//    }
+    override fun onTenantFetchSuccessByBuildingId(tenant: TenantUtils) {
+        super.onTenantFetchSuccessByBuildingId(tenant)
+        tenantUtils = tenant
+        setViews()
+    }
+
 
     override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
         super.onPerticularFetchSuccess(particularList)
@@ -92,19 +114,28 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
     }
 
+    private fun setPropertyViews() {
+        binding.navigationTitle.text = propertyUtils.buildingName
+        binding.address.text = propertyUtils.address
+        if (propertyUtils.propertyStatus)
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+        else
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+    }
     // Setting views
     private fun setViews() {
-//        binding.navigationTitle.text = tenantUtils.buildingName
-//        binding.currentTenantName.text = tenantUtils.tenantName
-//        binding.currentTenantPhone.text = tenantUtils.phoneNumber
-//        binding.totalDebit.text = tenantUtils.totalDebit.toString()
-//        binding.totalCredit.text = tenantUtils.totalCredit.toString()
-//        binding.idProof.text = tenantUtils.idProof
-//
-//        if (tenantUtils.propertyStatus)
-//            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
-//        else
-//            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+        binding.navigationTitle.text = propertyUtils.buildingName
+        binding.currentTenantName.text = tenantUtils!!.tenantName
+        binding.currentTenantPhone.text = tenantUtils!!.phoneNumber
+        binding.totalDebit.text = tenantUtils!!.totalDebit.toString()
+        binding.totalCredit.text = tenantUtils!!.totalCredit.toString()
+        binding.idProof.text = tenantUtils!!.idProof
+        binding.address.text = propertyUtils.address
+
+        if (propertyUtils.propertyStatus)
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+        else
+            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
     }
 
     private fun leave() {

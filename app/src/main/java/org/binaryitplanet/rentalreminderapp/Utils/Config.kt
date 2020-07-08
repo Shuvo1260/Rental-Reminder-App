@@ -9,6 +9,7 @@ class Config {
         val TOOLBAR_TITLE_BACKUP_AND_RESTORE = "Backup and Restore"
         val TOOLBAR_TITLE_ADD_PROPERTY = "Add property"
         val TOOLBAR_TITLE_ADD_PARTICULAR= "Add particular"
+        val TOOLBAR_TITLE_ADD_TENANT= "Add tenant"
         val LIST_CACHED_SIZE = 1000
         val SHARED_PREFERENCE = "SharedPreference"
         val FIRST_REMINDER = "FirstReminder"

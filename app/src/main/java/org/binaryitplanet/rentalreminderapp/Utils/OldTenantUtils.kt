@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
-@Entity(tableName = Config.TABLE_NAME_PROPERTY)
+@Entity(tableName = Config.TABLE_NAME_OLD_TENANT)
 data class OldTenantUtils(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = Config.COLUMN_ID)

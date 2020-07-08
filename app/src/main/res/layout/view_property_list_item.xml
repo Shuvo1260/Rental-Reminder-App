@@ -42,57 +42,43 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/listBuildingName"
                 tools:text="Occupied" />
-
-            <TextView
-                android:id="@+id/renewDateTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/renewTitle"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/listBuildingName" />
 
             <TextView
                 android:id="@+id/renewDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/renewDateTitle"
-                app:layout_constraintStart_toEndOf="@+id/renewDateTitle"
-                app:layout_constraintTop_toTopOf="@+id/renewDateTitle"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@+id/propertyStatus"
+                app:layout_constraintStart_toStartOf="@+id/propertyStatus"
+                app:layout_constraintTop_toBottomOf="@+id/propertyStatus"
                 tools:text="07/08/2020" />
 
             <TextView
                 android:id="@+id/currentTenantNameTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/propertyStatus"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/currentTenantName"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/renewDate" />
 
             <TextView
                 android:id="@+id/currentTenantPhoneTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/propertyStatus"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/currentTenantPhone"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_14sdp"
-                android:text="@string/currentTenantPhone"
                 android:textStyle="bold"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/currentTenantNameTitle" />
             <TextView
                 android:id="@+id/currentTenantName"
                 android:layout_width="wrap_content"

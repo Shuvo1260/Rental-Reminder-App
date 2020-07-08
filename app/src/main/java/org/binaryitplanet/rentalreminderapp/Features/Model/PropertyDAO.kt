@@ -15,4 +15,7 @@ interface PropertyDAO {
 
     @Delete
     fun delete(property: PropertyUtils)
+
+    @Query("SELECT * FROM Property ORDER BY Building_Name ASC")
+    fun getAllProperty(): List<PropertyUtils>
 }

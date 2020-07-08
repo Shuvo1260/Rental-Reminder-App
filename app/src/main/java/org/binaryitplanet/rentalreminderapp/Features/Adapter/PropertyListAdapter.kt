@@ -47,22 +47,28 @@ class PropertyListAdapter(
         val view = holder.itemView
         Log.d(TAG, "Item: ${propertyList[position]}")
         view.listBuildingName.text = propertyList[position].buildingName
-        view.currentTenantName.text = propertyList[position].tenantName
-        view.currentTenantPhone.text = propertyList[position].phoneNumber
 
-
-        if (!propertyList[position].propertyStatus) {
-            view.currentTenantNameTitle.text = Config.PREVIOUS_TENANT_TITLE
-            view.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
-        } else {
+        if (propertyList[position].propertyStatus) {
+            view.currentTenantName.text = propertyList[position].tenantName
+            view.currentTenantPhone.text = propertyList[position].phoneNumber
             view.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+            view.renewDate.text = Config.RENEW_DATE + propertyList[position].renewDate
+
+            if (propertyList[position].lastRant.isNullOrEmpty())
+                view.lastReceived.text = Config.LAST_RENT_EMPTY_MESSAGE
+            else
+                view.lastReceived.text = Config.LAST_RENT_MESSAGE + " " +
+                        propertyList[position].lastRant
+        } else {
+            view.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+            view.currentTenantNameTitle.visibility = View.GONE
+            view.currentTenantName.visibility = View.GONE
+            view.currentTenantPhoneTitle.visibility = View.GONE
+            view.currentTenantPhone.visibility = View.GONE
+            view.lastReceived.visibility = View.GONE
+            view.renewDate.visibility = View.GONE
         }
 
-        if (propertyList[position].lastRant.isNullOrEmpty())
-            view.lastReceived.text = Config.LAST_RENT_EMPTY_MESSAGE
-        else
-            view.lastReceived.text = Config.LAST_RENT_MESSAGE + " " +
-                    propertyList[position].lastRant
 
         view.setOnClickListener {
             Log.d(TAG, "PropertyClicked: $position")

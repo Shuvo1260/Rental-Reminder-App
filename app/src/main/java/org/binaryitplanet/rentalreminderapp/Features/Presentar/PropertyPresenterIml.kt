@@ -10,6 +10,7 @@ import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import java.lang.Exception
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PropertyPresenterIml(
     private var context: Context,
@@ -19,7 +20,22 @@ class PropertyPresenterIml(
     private val TAG = "PropertyPresenterIml"
 
     override fun fetchData(propertyStatus: Boolean) {
-        //
+        try{
+            var databaseManager = DatabaseManager.getInstance(context)
+
+
+
+            view?.onPropertyFetchSuccess(
+                databaseManager
+                    ?.getPropertyDAO()
+                    ?.getAllProperty()!!
+            )
+
+            Log.d(TAG, "PropertyFetchingSuccess: ")
+        }catch (e: Exception) {
+            Log.d(TAG, "PropertyFetchingError: ${e.message}")
+            view?.onPropertyAdd(false)
+        }
     }
 
     override fun saveData(propertyUtils: PropertyUtils) {

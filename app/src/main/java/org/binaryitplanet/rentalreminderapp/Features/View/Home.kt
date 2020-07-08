@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.PropertyListAdapter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.PropertyPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Services.ReminderManager
@@ -51,26 +52,29 @@ class Home : Fragment(), PropertyView {
     }
 
     private fun fetchData() {
-        val tenantPresenterIml = TenantPresenterIml(context!!, this)
-        tenantPresenterIml.fetchData(true)
-        tenantPresenterIml.totalRantReceivedThisMonth()
+        val propertyPresenterIml = PropertyPresenterIml(context!!, this)
+        propertyPresenterIml.fetchData(true)
+        propertyPresenterIml.totalRantReceivedThisMonth()
     }
 
 
-    override fun onPropertyFetchSuccess(propertyList: List<TenantUtils>) {
+    override fun onPropertyFetchSuccess(propertyList: List<PropertyUtils>) {
         super.onPropertyFetchSuccess(propertyList)
         Log.d(TAG, "propertyList: $propertyList")
+
         val propertyListAdapter = PropertyListAdapter(
             context!!,
             propertyList as ArrayList<PropertyUtils>
         )
 
+
+
         binding.list.adapter = propertyListAdapter
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
 
-        if (propertyList.isNotEmpty())
-            checkReminder()
+//        if (propertyList.isNotEmpty())
+//            checkReminder()
     }
 
     private fun checkReminder() {

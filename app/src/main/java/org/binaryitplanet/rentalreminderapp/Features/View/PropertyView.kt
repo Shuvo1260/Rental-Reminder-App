@@ -1,9 +1,9 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
-import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 
 interface PropertyView {
-    fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {}
+    fun onPropertyFetchSuccess(propertyList: List<PropertyUtils>) {}
     fun onPropertyAdd(status: Boolean){}
     fun onPropertyUpdate(status: Boolean){}
 

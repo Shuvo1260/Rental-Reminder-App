@@ -12,6 +12,7 @@ class Config {
         val LIST_CACHED_SIZE = 1000
         val SHARED_PREFERENCE = "SharedPreference"
         val FIRST_REMINDER = "FirstReminder"
+        val RENEW_DATE = "Renew date: "
 
         val SUCCESS_MESSAGE = "Success"
         val FAILED_MESSAGE  = "Failed"

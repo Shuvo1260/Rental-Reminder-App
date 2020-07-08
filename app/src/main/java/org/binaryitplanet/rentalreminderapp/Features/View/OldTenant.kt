@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.PropertyListAdapter
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.FragmentOldTenantBinding
 
@@ -39,7 +40,7 @@ class OldTenant : Fragment(), PropertyView{
     }
 
 
-    override fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {
+    override fun onPropertyFetchSuccess(tenantList: List<PropertyUtils>) {
         super.onPropertyFetchSuccess(tenantList)
         Log.d(TAG, "TenantList: $tenantList")
 //        val propertyListAdapter = PropertyListAdapter(

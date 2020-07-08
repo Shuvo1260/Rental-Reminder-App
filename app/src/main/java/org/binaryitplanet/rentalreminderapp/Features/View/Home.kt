@@ -15,6 +15,7 @@ import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIm
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Services.ReminderManager
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.ReminderUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.FragmentHomeBinding
@@ -56,19 +57,19 @@ class Home : Fragment(), PropertyView {
     }
 
 
-    override fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {
-        super.onPropertyFetchSuccess(tenantList)
-        Log.d(TAG, "TenantList: $tenantList")
+    override fun onPropertyFetchSuccess(propertyList: List<TenantUtils>) {
+        super.onPropertyFetchSuccess(propertyList)
+        Log.d(TAG, "propertyList: $propertyList")
         val propertyListAdapter = PropertyListAdapter(
             context!!,
-            tenantList as ArrayList<TenantUtils>
+            propertyList as ArrayList<PropertyUtils>
         )
 
         binding.list.adapter = propertyListAdapter
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
 
-        if (tenantList.isNotEmpty())
+        if (propertyList.isNotEmpty())
             checkReminder()
     }
 

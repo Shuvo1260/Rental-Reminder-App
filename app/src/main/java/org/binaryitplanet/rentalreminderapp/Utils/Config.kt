@@ -15,8 +15,8 @@ class Config {
 
         val SUCCESS_MESSAGE = "Success"
         val FAILED_MESSAGE  = "Failed"
-        val LAST_RANT_EMPTY_MESSAGE = "No rant received yet"
-        val LAST_RANT_MESSAGE = "Last rant received"
+        val LAST_RENT_EMPTY_MESSAGE = "No rent received yet"
+        val LAST_RENT_MESSAGE = "Last rent received"
         val PREVIOUS_TENANT_TITLE = "Previous tenant name"
         val LEAVING_TENANT_TITLE = "Leaving tenant"
         val LEAVING_TENANT_MESSAGE = "Are you sure the tenant is leaving?"
@@ -37,8 +37,8 @@ class Config {
         val REMINDER_NAME = "ReminderName"
         val PENDING_REMINDER_CODE = "PendingReminderCode"
         val PENDING_REMINDER = "PendingReminder"
-        val REMINDER_TITLE = "You haven't received all of your rants. "
-        val REMINDER_MESSAGE = "Please check your property list and see who hasn't given you rant."
+        val REMINDER_TITLE = "You haven't received all of your rents. "
+        val REMINDER_MESSAGE = "Please check your property list and see who hasn't given you rent."
 
 //        Notification Section
         val NOTIFICATION_BUNDLE = "NotificationBundle"
@@ -51,12 +51,15 @@ class Config {
         const val DATABASE_NAME = "Rental_Reminder"
         const val DATABASE_NAME_WITH_FORMAT = "Rental_Reminder.db"
         const val TABLE_NAME_TENANT = "Tenants"
+        const val TABLE_NAME_OLD_TENANT = "Old_Tenants"
+        const val TABLE_NAME_PROPERTY = "Property"
         const val TABLE_NAME_REMINDER = "Reminders"
         const val TABLE_NAME_PARTICULAS = "Particulars"
 
 //        Table
         const val COLUMN_ID = "ID"
-        const val COLUMN_USER_ID = "User_ID"
+        const val COLUMN_BUILDING_ID = "Building_ID"
+        const val COLUMN_TENANT_ID = "Tenant_ID"
         const val COLUMN_DAY = "Day"
         const val COLUMN_MONTH = "Month"
         const val COLUMN_YEAR = "Year"
@@ -70,9 +73,13 @@ class Config {
         const val COLUMN_ID_PROOF = "Id_Proof"
         const val COLUMN_PROPERTY_STATUS = "Property_Status"
         const val COLUMN_TRANSACTION_TYPE = "Transaction_type"
+        const val COLUMN_PAYMENT_TYPE = "Payment_type"
         const val COLUMN_TOTAL_DEBIT = "Total_debit"
         const val COLUMN_TOTAL_CREDIT = "Total_credit"
-        const val COLUMN_LAST_RANT_RECEIVED = "Last_Rant"
+        const val COLUMN_LAST_RENT_RECEIVED = "Last_Rent"
+        const val COLUMN_LAST_ADDRESS = "Address"
+        const val COLUMN_RENEW_DATE = "Renew_Date"
+        const val COLUMN_JOIN_DATE = "Join_Date"
 
 //        Backup And Restore section
         const val SD_CARD_PATH = "/sdcard/"

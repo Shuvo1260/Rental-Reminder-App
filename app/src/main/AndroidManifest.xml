@@ -10,7 +10,6 @@
 
     <permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
 
-
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -19,12 +18,13 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Features.View.ViewOldProperty"
-            android:screenOrientation="portrait"></activity>
-
+        <activity android:name=".Features.View.AddTenant"></activity>
+        <activity
+            android:name=".Features.View.ViewOldProperty"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Features.View.AddParticulars"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Features.View.AddProperty"
             android:screenOrientation="portrait" />

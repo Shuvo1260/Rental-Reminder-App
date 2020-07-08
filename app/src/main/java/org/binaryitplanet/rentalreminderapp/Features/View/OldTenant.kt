@@ -42,14 +42,14 @@ class OldTenant : Fragment(), PropertyView{
     override fun onPropertyFetchSuccess(tenantList: List<TenantUtils>) {
         super.onPropertyFetchSuccess(tenantList)
         Log.d(TAG, "TenantList: $tenantList")
-        val propertyListAdapter = PropertyListAdapter(
-            context!!,
-            tenantList as ArrayList<TenantUtils>
-        )
+//        val propertyListAdapter = PropertyListAdapter(
+//            context!!,
+//            tenantList as ArrayList<TenantUtils>
+//        )
 
-        binding.list.adapter = propertyListAdapter
-        binding.list.layoutManager = LinearLayoutManager(context)
-        binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
+//        binding.list.adapter = propertyListAdapter
+//        binding.list.layoutManager = LinearLayoutManager(context)
+//        binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
     }
 
 

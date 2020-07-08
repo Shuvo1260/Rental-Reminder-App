@@ -66,17 +66,17 @@ class ViewOldProperty : AppCompatActivity(), ParticularView {
 
     // Setting views
     private fun setViews() {
-        binding.navigationTitle.text = tenantUtils.buildingName
-        binding.currentTenantName.text = tenantUtils.tenantName
-        binding.currentTenantPhone.text = tenantUtils.phoneNumber
-        binding.totalDebit.text = tenantUtils.totalDebit.toString()
-        binding.totalCredit.text = tenantUtils.totalCredit.toString()
-        binding.idProof.text = tenantUtils.idProof
-
-        if (tenantUtils.propertyStatus)
-            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
-        else
-            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+//        binding.navigationTitle.text = tenantUtils.buildingName
+//        binding.currentTenantName.text = tenantUtils.tenantName
+//        binding.currentTenantPhone.text = tenantUtils.phoneNumber
+//        binding.totalDebit.text = tenantUtils.totalDebit.toString()
+//        binding.totalCredit.text = tenantUtils.totalCredit.toString()
+//        binding.idProof.text = tenantUtils.idProof
+//
+//        if (tenantUtils.propertyStatus)
+//            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+//        else
+//            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
     }
 
 

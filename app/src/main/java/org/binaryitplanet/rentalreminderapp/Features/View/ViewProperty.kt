@@ -68,16 +68,16 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
         tenantPresenterIml.fetchDataById(id!!)
     }
 
-    override fun onTenantFetchSuccess(tenantUtils: TenantUtils) {
-        super.onTenantFetchSuccess(tenantUtils)
-        this.tenantUtils = tenantUtils
-        setViews()
-        val particularPresenter = ParticularPresenterIml(
-            this,
-            this
-        )
-        particularPresenter.fetchData(tenantUtils.id!!)
-    }
+//    override fun onTenantFetchSuccess(tenantUtils: TenantUtils) {
+//        super.onTenantFetchSuccess(tenantUtils)
+//        this.tenantUtils = tenantUtils
+//        setViews()
+//        val particularPresenter = ParticularPresenterIml(
+//            this,
+//            this
+//        )
+//        particularPresenter.fetchData(tenantUtils.id!!)
+//    }
 
     override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
         super.onPerticularFetchSuccess(particularList)
@@ -94,48 +94,48 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView {
 
     // Setting views
     private fun setViews() {
-        binding.navigationTitle.text = tenantUtils.buildingName
-        binding.currentTenantName.text = tenantUtils.tenantName
-        binding.currentTenantPhone.text = tenantUtils.phoneNumber
-        binding.totalDebit.text = tenantUtils.totalDebit.toString()
-        binding.totalCredit.text = tenantUtils.totalCredit.toString()
-        binding.idProof.text = tenantUtils.idProof
-
-        if (tenantUtils.propertyStatus)
-            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
-        else
-            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+//        binding.navigationTitle.text = tenantUtils.buildingName
+//        binding.currentTenantName.text = tenantUtils.tenantName
+//        binding.currentTenantPhone.text = tenantUtils.phoneNumber
+//        binding.totalDebit.text = tenantUtils.totalDebit.toString()
+//        binding.totalCredit.text = tenantUtils.totalCredit.toString()
+//        binding.idProof.text = tenantUtils.idProof
+//
+//        if (tenantUtils.propertyStatus)
+//            binding.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+//        else
+//            binding.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
     }
 
     private fun leave() {
-        Log.d(TAG, "Leaving ")
-
-        val builder = AlertDialog.Builder(this)
-
-        builder.setTitle(Config.LEAVING_TENANT_TITLE)
-        builder.setMessage(Config.LEAVING_TENANT_MESSAGE)
-
-        builder.setIcon(R.drawable.ic_launcher)
-
-        builder.setPositiveButton(
-            Config.YES_MESSAGE
-        ){
-            dialog: DialogInterface?, which: Int ->
-
-            tenantUtils.propertyStatus = false
-
-            val presenter = TenantPresenterIml(this, this)
-            presenter.updateData(tenantUtils)
-        }
-
-        builder.setNegativeButton(
-            Config.NO_MESSAGE
-        ){
-            dialog: DialogInterface?, which: Int ->
-        }
-
-        val alertDialog = builder.create()
-        alertDialog.show()
+//        Log.d(TAG, "Leaving ")
+//
+//        val builder = AlertDialog.Builder(this)
+//
+//        builder.setTitle(Config.LEAVING_TENANT_TITLE)
+//        builder.setMessage(Config.LEAVING_TENANT_MESSAGE)
+//
+//        builder.setIcon(R.drawable.ic_launcher)
+//
+//        builder.setPositiveButton(
+//            Config.YES_MESSAGE
+//        ){
+//            dialog: DialogInterface?, which: Int ->
+//
+//            tenantUtils.propertyStatus = false
+//
+//            val presenter = TenantPresenterIml(this, this)
+//            presenter.updateData(tenantUtils)
+//        }
+//
+//        builder.setNegativeButton(
+//            Config.NO_MESSAGE
+//        ){
+//            dialog: DialogInterface?, which: Int ->
+//        }
+//
+//        val alertDialog = builder.create()
+//        alertDialog.show()
 
     }
 

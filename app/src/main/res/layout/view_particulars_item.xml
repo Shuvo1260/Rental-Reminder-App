@@ -21,27 +21,25 @@
             >
 
             <TextView
-                android:id="@+id/type"
+                android:id="@+id/paymentType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Credit"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
-                />
+                app:layout_constraintBottom_toTopOf="@+id/amount"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Rent" />
+
             <TextView
                 android:id="@+id/monthYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/type"
-                android:layout_marginTop="@dimen/_5sdp"
-                tools:text="June 2020"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="June 2020" />
 
             <TextView
                 android:id="@+id/dateTitle"
@@ -78,34 +76,33 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/_12sdp"
-                tools:text="Remark\ndetails"
+                tools:text="Remark details"
                 />
 
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/type"
-                app:layout_constraintEnd_toStartOf="@id/rupeeSign"
-                app:layout_constraintBottom_toTopOf="@id/remark"
-                android:layout_marginEnd="@dimen/_2sdp"
-                tools:text="50000"
                 android:fontFamily="@font/maximus_bold"
                 android:textColor="@color/green"
                 android:textSize="@dimen/_12sdp"
-                />
+                app:layout_constraintBottom_toTopOf="@id/remark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/paymentType"
+                tools:text="50000" />
 
             <TextView
                 android:id="@+id/rupeeSign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/amount"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/amount"
                 app:layout_constraintBottom_toBottomOf="@id/amount"
                 android:text="@string/rupeeSign"
                 android:fontFamily="@font/maximus_bold"
                 android:textColor="@color/green"
                 android:textSize="@dimen/_12sdp"
+                android:layout_marginRight="2dp"
                 />
 
 

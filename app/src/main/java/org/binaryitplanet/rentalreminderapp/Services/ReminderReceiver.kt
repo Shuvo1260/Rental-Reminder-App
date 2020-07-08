@@ -110,21 +110,21 @@ class ReminderReceiver: BroadcastReceiver() {
 
     private fun isRantClear(context: Context, bundle: Bundle?): Boolean {
         try {
-            val months = context.resources.getStringArray(R.array.months)
-            val reminderUtils = bundle?.get(Config.PENDING_REMINDER) as ReminderUtils
-            val month = months[Calendar.getInstance().get(Calendar.MONTH)]
-            val year = reminderUtils.year
-
-            val totalProperty = DatabaseManager.getInstance(context)
-                ?.getTenantDAO()?.countTotalPropertyByStatus(true)
-
-            val totalRantReceived = DatabaseManager.getInstance(context)
-                ?.getParticularDAO()?.countTotalParticularByStatus(month, year, "Credit")
-
-
-            Log.d(TAG, "ReminderReceived: $totalProperty $totalRantReceived")
-            if (totalProperty!! - totalRantReceived!! == 0)
-                return true
+//            val months = context.resources.getStringArray(R.array.months)
+//            val reminderUtils = bundle?.get(Config.PENDING_REMINDER) as ReminderUtils
+//            val month = months[Calendar.getInstance().get(Calendar.MONTH)]
+//            val year = reminderUtils.year
+//
+//            val totalProperty = DatabaseManager.getInstance(context)
+//                ?.getTenantDAO()?.countTotalPropertyByStatus(true)
+//
+//            val totalRantReceived = DatabaseManager.getInstance(context)
+//                ?.getParticularDAO()?.countTotalParticularByStatus(month, year, "Credit")
+//
+//
+//            Log.d(TAG, "ReminderReceived: $totalProperty $totalRantReceived")
+//            if (totalProperty!! - totalRantReceived!! == 0)
+//                return true
         }catch (e: Exception) {
             Log.d(TAG, "RantFailed: ${e.message}")
         }

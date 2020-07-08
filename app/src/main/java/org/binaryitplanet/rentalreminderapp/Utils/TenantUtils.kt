@@ -12,11 +12,8 @@ data class TenantUtils(
     @ColumnInfo(name = Config.COLUMN_ID)
     val id: Long?,
 
-    @ColumnInfo(name = Config.COLUMN_BUILDING_NAME)
-    val buildingName: String,
-
-    @ColumnInfo(name = Config.COLUMN_COMMENT)
-    val comment: String,
+    @ColumnInfo(name = Config.COLUMN_BUILDING_ID)
+    val buildingId: Long?,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
     val tenantName: String,
@@ -24,19 +21,17 @@ data class TenantUtils(
     @ColumnInfo(name = Config.COLUMN_PHONE_NUMBER)
     val phoneNumber: String,
 
+    @ColumnInfo(name = Config.COLUMN_JOIN_DATE)
+    val joinDate: String,
+
     @ColumnInfo(name = Config.COLUMN_ID_PROOF)
     val idProof: String,
-
-    @ColumnInfo(name = Config.COLUMN_PROPERTY_STATUS)
-    var propertyStatus: Boolean,
 
     @ColumnInfo(name = Config.COLUMN_TOTAL_DEBIT)
     var totalDebit: Int,
 
     @ColumnInfo(name = Config.COLUMN_TOTAL_CREDIT)
-    var totalCredit: Int,
+    var totalCredit: Int
 
-    @ColumnInfo(name = Config.COLUMN_LAST_RANT_RECEIVED)
-    var lastRant: String?
 ) :Serializable {
 }

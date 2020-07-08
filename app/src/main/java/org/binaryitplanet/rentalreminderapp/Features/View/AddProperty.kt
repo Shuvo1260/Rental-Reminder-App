@@ -8,9 +8,13 @@ import android.view.Menu
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.activity_add_tenant.*
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.PropertyPresentar
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.PropertyPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityAddPropertyBinding
 
@@ -21,10 +25,7 @@ class AddProperty : AppCompatActivity(), PropertyView {
     private lateinit var binding: ActivityAddPropertyBinding
 
     private lateinit var buildingName: String
-    private lateinit var comment: String
-    private lateinit var tenantName: String
-    private lateinit var phoneNumber: String
-    private lateinit var idProof: String
+    private lateinit var address: String
 
 
 
@@ -43,46 +44,23 @@ class AddProperty : AppCompatActivity(), PropertyView {
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
-
-
-        val tenantPresenterIml = TenantPresenterIml(this, this)
-        tenantPresenterIml.buildingList()
     }
 
     // Checking input field validity
     private fun checkValidity(): Boolean {
         buildingName = binding.buildingName.text.toString()
-        comment = binding.comment.text.toString()
-        tenantName = binding.tenantName.text.toString()
-        phoneNumber = binding.phoneNumber.text.toString()
-        idProof = binding.idProof.text.toString()
+        address = binding.address.text.toString()
 
         if(buildingName.isNullOrEmpty()) {
             binding.buildingName.error = Config.ERROR_INVALID_MESSAGE
             binding.buildingName.requestFocus()
             return false
         }
-        if(tenantName.isNullOrEmpty()) {
-            binding.tenantName.error = Config.ERROR_INVALID_MESSAGE
-            binding.tenantName.requestFocus()
+        if(address.isNullOrEmpty()) {
+            binding.address.error = Config.ERROR_INVALID_MESSAGE
+            binding.address.requestFocus()
             return false
         }
-        if(phoneNumber.isNullOrEmpty()) {
-            binding.phoneNumber.error = Config.ERROR_INVALID_MESSAGE
-            binding.phoneNumber.requestFocus()
-            return false
-        }
-        if(idProof.isNullOrEmpty()) {
-            binding.idProof.error = Config.ERROR_INVALID_MESSAGE
-            binding.idProof.requestFocus()
-            return false
-        }
-        if(comment.isNullOrEmpty()) {
-            binding.comment.error = Config.ERROR_INVALID_MESSAGE
-            binding.comment.requestFocus()
-            return false
-        }
-
         return true
     }
 
@@ -90,21 +68,19 @@ class AddProperty : AppCompatActivity(), PropertyView {
     private fun saveData() {
         Log.d(TAG, "Saving Data: $buildingName")
 
-        val tenantUtils = TenantUtils(
+        val propertyUtils = PropertyUtils(
             null,
             buildingName,
-            comment,
-            tenantName,
-            phoneNumber,
-            idProof,
-            true,
-            0,
-            0,
+            null,
+            null,
+            false,
+            null,
+            address,
             null
         )
 
-        val presenter = TenantPresenterIml(this, this)
-        presenter.saveData(tenantUtils)
+        val presenter = PropertyPresenterIml(this, this)
+        presenter.saveData(propertyUtils)
     }
 
     // Saving status
@@ -124,18 +100,6 @@ class AddProperty : AppCompatActivity(), PropertyView {
                 Toast.LENGTH_SHORT
             ).show()
         }
-    }
-
-    override fun onBuildingListFetchSuccess(buildinList: List<String>) {
-        super.onBuildingListFetchSuccess(buildinList)
-
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            buildinList
-        )
-
-        binding.buildingName.setAdapter(adapter)
     }
 
 

@@ -1,5 +1,6 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.view.Menu
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.activity_add_particulars.view.*
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenter
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
@@ -29,10 +31,16 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     private var month: String? = null
     private var year: String? = null
     private var transactionType: String? = null
+    private var paymentType: String? = null
     private var amount: String? = null
     private var remark: String? = null
+    private var issueDate: String? = null
 
     private lateinit var tenantUtils: TenantUtils
+
+    private var issueDay: Int = 0
+    private var issueMonth: Int = 0
+    private var issueYear: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +58,39 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         }
 
         setUpDropDown()
+
+        getCurrentDate()
+
+        setUpIssueDate()
+
+        setUpIssueDateListener()
+    }
+
+    private fun setUpIssueDateListener() {
+        binding.issueDate.setOnClickListener {
+            DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                issueDay = dayOfMonth
+                issueMonth = month
+                issueYear = year
+                setUpIssueDate()
+            }, issueYear, issueMonth, issueDay).show()
+        }
+    }
+
+    private fun setUpIssueDate() {
+        issueDate = "%02d/$02d/%04d".format(
+            issueDay,
+            issueMonth,
+            issueYear
+        )
+        binding.issueDate.text = issueDate
     }
 
     private fun setUpDropDown() {
         var transactionTypes = resources.getStringArray(R.array.transactionType)
         var months = resources.getStringArray(R.array.months)
         var years = resources.getStringArray(R.array.years)
+        var paymentTypes = resources.getStringArray(R.array.paymentType)
 
         var transactionAdapter = ArrayAdapter(
             this,
@@ -73,9 +108,20 @@ class AddParticulars : AppCompatActivity(), ParticularView {
             years
         )
 
+        var paymentAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            paymentTypes
+        )
+
+
         binding.type.setText(transactionTypes[0])
+        binding.paymentType.setText(paymentTypes[0])
+        binding.month.setText(months[0])
+        binding.year.setText(years[0])
 
         binding.type.setAdapter(transactionAdapter)
+        binding.paymentType.setAdapter(paymentAdapter)
         binding.month.setAdapter(monthsAdapter)
         binding.year.setAdapter(yearsAdapter)
     }
@@ -84,13 +130,14 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         Log.d(TAG, "Saving Data")
         if(checkValidity()){
             tenantUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as TenantUtils
-            val date = getCurrentDate()
+
             val particularUtils = ParticularUtils(
                 null,
                 tenantUtils.id!!,
                 transactionType!!,
+                "",
                 amount = amount?.toInt()!!,
-                date = date,
+                date = issueDate!!,
                 month = month!!,
                 year = year?.toInt()!!,
                 remark = remark!!
@@ -106,14 +153,11 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         }
     }
 
-    private fun getCurrentDate(): String {
+    private fun getCurrentDate() {
         val calendar = Calendar.getInstance()
-        val date = calendar.get(Calendar.DAY_OF_MONTH).toString() + "/" +
-                (calendar.get(Calendar.MONTH)+1) + "/" +
-                calendar.get(Calendar.YEAR)
-
-        Log.d(TAG, "Date: $date")
-        return date
+        issueDay = calendar.get(Calendar.DAY_OF_MONTH)
+        issueMonth = calendar.get(Calendar.MONTH)
+        issueYear = calendar.get(Calendar.YEAR)
     }
 
     override fun onPerticularAdd(status: Boolean) {
@@ -141,12 +185,19 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         month = binding.month.text.toString()
         year = binding.year.text.toString()
         remark = binding.remark.text.toString()
+        paymentType = binding.paymentType.text.toString()
 
         if (transactionType.isNullOrEmpty()) {
             binding.type.error = Config.ERROR_INVALID_MESSAGE
             binding.type.requestFocus()
             return false
         }
+        if (paymentType.isNullOrEmpty()) {
+            binding.paymentType.error = Config.ERROR_INVALID_MESSAGE
+            binding.paymentType.requestFocus()
+            return false
+        }
+
         if (amount.isNullOrEmpty()) {
             binding.amount.error = Config.ERROR_INVALID_MESSAGE
             binding.amount.requestFocus()

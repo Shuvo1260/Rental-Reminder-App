@@ -35,7 +35,7 @@ class ParticularListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
-        view.type.text = particularList[position].transactionType
+        view.paymentType.text = particularList[position].paymentType
         view.monthYear.text = particularList[position].month + ", " +
                 particularList[position].year
         view.date.text = particularList[position].date

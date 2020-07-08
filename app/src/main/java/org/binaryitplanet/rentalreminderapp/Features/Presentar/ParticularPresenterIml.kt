@@ -18,42 +18,42 @@ class ParticularPresenterIml(
 
     override fun fetchData(userId: Long) {
 
-        try {
-            val databaseManager = DatabaseManager.getInstance(context)
-
-            view?.onPerticularFetchSuccess(
-                databaseManager?.getParticularDAO()?.getParticularsByUserId(userId)!!
-            )
-        }catch (e: Exception) {
-            Log.d(TAG, "ParticularFetchException: ${e.message}")
-        }
+//        try {
+//            val databaseManager = DatabaseManager.getInstance(context)
+//
+//            view?.onPerticularFetchSuccess(
+//                databaseManager?.getParticularDAO()?.getParticularsByUserId(userId)!!
+//            )
+//        }catch (e: Exception) {
+//            Log.d(TAG, "ParticularFetchException: ${e.message}")
+//        }
     }
 
     override fun saveData(tenantUtils: TenantUtils, particularUtils: ParticularUtils) {
 
-        try {
-            val databaseManager = DatabaseManager.getInstance(context)
-
-            databaseManager?.getParticularDAO()?.insert(particularUtils)
-
-            if (particularUtils.transactionType == "Credit")
-                tenantUtils.totalCredit += particularUtils.amount
-            else
-                tenantUtils.totalDebit += particularUtils.amount
-
-            tenantUtils.lastRant = particularUtils.month + ", " +
-                    particularUtils.year
-
-
-            Log.d(TAG, "SavingParticularData: $tenantUtils and $particularUtils")
-
-            databaseManager?.getTenantDAO()?.update(tenantUtils)
-
-            view?.onPerticularAdd(true)
-        }catch (e: Exception) {
-            Log.d(TAG, "ParticularSavingException: ${e.message}")
-
-            view?.onPerticularAdd(false)
-        }
+//        try {
+//            val databaseManager = DatabaseManager.getInstance(context)
+//
+//            databaseManager?.getParticularDAO()?.insert(particularUtils)
+//
+//            if (particularUtils.transactionType == "Credit")
+//                tenantUtils.totalCredit += particularUtils.amount
+//            else
+//                tenantUtils.totalDebit += particularUtils.amount
+//
+//            tenantUtils.lastRant = particularUtils.month + ", " +
+//                    particularUtils.year
+//
+//
+//            Log.d(TAG, "SavingParticularData: $tenantUtils and $particularUtils")
+//
+//            databaseManager?.getTenantDAO()?.update(tenantUtils)
+//
+//            view?.onPerticularAdd(true)
+//        }catch (e: Exception) {
+//            Log.d(TAG, "ParticularSavingException: ${e.message}")
+//
+//            view?.onPerticularAdd(false)
+//        }
     }
 }

@@ -15,12 +15,13 @@ import org.binaryitplanet.rentalreminderapp.Features.View.ViewOldProperty
 import org.binaryitplanet.rentalreminderapp.Features.View.ViewProperty
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
+import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import android.util.Pair as UtilPair
 
 class PropertyListAdapter(
     val context: Context,
-    val tenantList: ArrayList<TenantUtils>
+    val propertyList: ArrayList<PropertyUtils>
 ): RecyclerView.Adapter<PropertyListAdapter.ViewHolder>() {
 
     private val TAG = "PropertyListAdapter"
@@ -38,37 +39,41 @@ class PropertyListAdapter(
         )
     }
 
-    override fun getItemCount(): Int = tenantList.size
+    override fun getItemCount(): Int = propertyList.size
 
 
     // Setting values into view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val view = holder.itemView
-        Log.d(TAG, "Item: ${tenantList[position]}")
-        view.listBuildingName.text = tenantList[position].buildingName
-        view.currentTenantName.text = tenantList[position].tenantName
-        view.currentTenantPhone.text = tenantList[position].phoneNumber
-        view.details.text = tenantList[position].comment
+        Log.d(TAG, "Item: ${propertyList[position]}")
+        view.listBuildingName.text = propertyList[position].buildingName
+        view.currentTenantName.text = propertyList[position].tenantName
+        view.currentTenantPhone.text = propertyList[position].phoneNumber
 
-        if (!tenantList[position].propertyStatus)
+
+        if (!propertyList[position].propertyStatus) {
             view.currentTenantNameTitle.text = Config.PREVIOUS_TENANT_TITLE
+            view.propertyStatus.text = Config.PROPERTY_STATUS_UNOCCUPIED
+        } else {
+            view.propertyStatus.text = Config.PROPERTY_STATUS_OCCUPIED
+        }
 
-        if (tenantList[position].lastRant.isNullOrEmpty())
-            view.lastReceived.text = Config.LAST_RANT_EMPTY_MESSAGE
+        if (propertyList[position].lastRant.isNullOrEmpty())
+            view.lastReceived.text = Config.LAST_RENT_EMPTY_MESSAGE
         else
-            view.lastReceived.text = Config.LAST_RANT_MESSAGE + " " +
-                    tenantList[position].lastRant
+            view.lastReceived.text = Config.LAST_RENT_MESSAGE + " " +
+                    propertyList[position].lastRant
 
         view.setOnClickListener {
             Log.d(TAG, "PropertyClicked: $position")
 
             var intent = Intent(context, ViewProperty::class.java)
 
-            if (!tenantList[position].propertyStatus)
+            if (!propertyList[position].propertyStatus)
                 intent = Intent(context, ViewOldProperty::class.java)
 
             // Passing selected item data
-            intent.putExtra(Config.PROPERTY_INFORMATION, tenantList[position])
+            intent.putExtra(Config.PROPERTY_INFORMATION, propertyList[position])
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // Creating animation options

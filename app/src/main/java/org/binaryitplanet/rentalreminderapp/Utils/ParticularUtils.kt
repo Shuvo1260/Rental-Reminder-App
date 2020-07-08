@@ -12,11 +12,14 @@ data class ParticularUtils(
     @ColumnInfo(name = Config.COLUMN_ID)
     val Id: Long?,
 
-    @ColumnInfo(name = Config.COLUMN_USER_ID)
-    val userId: Long,
+    @ColumnInfo(name = Config.COLUMN_TENANT_ID)
+    val tenantID: Long,
 
     @ColumnInfo(name = Config.COLUMN_TRANSACTION_TYPE)
     val transactionType: String,
+
+    @ColumnInfo(name = Config.COLUMN_PAYMENT_TYPE)
+    val paymentType: String,
 
     @ColumnInfo(name = Config.COLUMN_DATE)
     val date: String,

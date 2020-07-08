@@ -34,9 +34,9 @@
                 android:textColorHint="@color/colorPrimary"
                 android:layout_marginTop="@dimen/_30sdp"
                 app:boxStrokeColor="@color/white"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/buildingName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,75 +46,18 @@
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/tenantName"
-                android:textColorHint="@color/colorPrimary"
-                app:boxStrokeColor="@color/white"
-                android:layout_marginTop="@dimen/_10sdp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tenantName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phoneNumber"
-                android:textColorHint="@color/colorPrimary"
-                app:boxStrokeColor="@color/white"
-                android:layout_marginTop="@dimen/_10sdp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:inputType="phone"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/idProof"
-                android:textColorHint="@color/colorPrimary"
-                app:boxStrokeColor="@color/white"
-                android:layout_marginTop="@dimen/_10sdp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idProof"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:imeOptions="actionNext"
-                android:singleLine="true"
-                />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/comment"
+                android:hint="@string/address"
                 android:textColorHint="@color/colorPrimary"
                 app:boxStrokeColor="@color/white"
                 android:layout_marginTop="@dimen/_10sdp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/comment"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"

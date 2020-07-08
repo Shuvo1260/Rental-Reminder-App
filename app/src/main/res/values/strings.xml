@@ -1,29 +1,33 @@
 <resources>
-    <string name="app_name">Rental Reminder App</string>
+    <string name="app_name">Rentinget</string>
 
     <string name="splashScreenTitle">The Rental Reminder App</string>
-    <string name="splashScreenSubTitle">Tradinget</string>
+    <string name="splashScreenSubTitle">Rentinget</string>
 
     <string name="logoContentDescription">Logo</string>
     <string name="backUpMessage">Backup your data to keep safe</string>
     <string name="backup">Backup</string>
     <string name="restore">Restore</string>
+    <string name="joinDate">Join Date:</string>
+    <string name="issueDate">Issue Date:</string>
 
 
     <!--    Hints-->
 
     <string name="buildingName">Building name</string>
     <string name="tenantName">Tenant name</string>
+    <string name="address">Address</string>
     <string name="phoneNumber">Phone number</string>
     <string name="idProof">ID proof</string>
     <string name="remark">Remark</string>
 
     <!--    Home-->
-    <string name="totalRantOfThisMonth">Total rant received this month</string>
+    <string name="totalRentOfThisMonth">Total rent received this month</string>
     <string name="listOfMyProperties">List of my properties</string>
 
     <!--    Property view-->
-    <string name="transactionType">Type</string>
+    <string name="transactionType">Transaction type</string>
+    <string name="paymentType">Payment type</string>
 
     <!--    Property list item-->
     <string name="currentTenantName">Current tenant name</string>
@@ -31,6 +35,7 @@
     <string name="totalDebit">Total debit:</string>
     <string name="totalCredit">Total credit:</string>
     <string name="comment">Comment</string>
+    <string name="renewTitle">Renew Date:</string>
 
     <!--    Particular Items-->
     <string name="dateTitle">Date:</string>

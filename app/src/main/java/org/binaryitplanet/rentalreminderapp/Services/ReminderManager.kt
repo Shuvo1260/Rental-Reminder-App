@@ -79,8 +79,7 @@ class ReminderManager(
 
     fun setReminder(): Boolean {
         val currentTime = Calendar.getInstance().timeInMillis
-//        val reminderTime = calendar.timeInMillis
-        val reminderTime = currentTime + 60000
+        val reminderTime = calendar.timeInMillis
 
         if (reminderTime >= currentTime) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

@@ -12,13 +12,31 @@ data class OldTenantUtils(
     @ColumnInfo(name = Config.COLUMN_ID)
     val id: Long?,
 
+    @ColumnInfo(name = Config.COLUMN_TENANT_ID)
+    val tenantId: Long?,
+
     @ColumnInfo(name = Config.COLUMN_BUILDING_NAME)
     val buildingName: String,
+
+    @ColumnInfo(name = Config.COLUMN_LAST_ADDRESS)
+    val address: String,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
     val tenantName: String,
 
     @ColumnInfo(name = Config.COLUMN_PHONE_NUMBER)
-    val phoneNumber: String
+    val phoneNumber: String,
+
+    @ColumnInfo(name = Config.COLUMN_JOIN_DATE)
+    val joinDate: String,
+
+    @ColumnInfo(name = Config.COLUMN_ID_PROOF)
+    val idProof: String,
+
+    @ColumnInfo(name = Config.COLUMN_TOTAL_DEBIT)
+    var totalDebit: Int,
+
+    @ColumnInfo(name = Config.COLUMN_TOTAL_CREDIT)
+    var totalCredit: Int
 ): Serializable {
 }

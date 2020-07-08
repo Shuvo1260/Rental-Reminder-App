@@ -1,19 +1,22 @@
 package org.binaryitplanet.rentalreminderapp.Features.Model
 
 import androidx.room.*
-import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
+import org.binaryitplanet.rentalreminderapp.Utils.OldTenantUtils
 
 
 @Dao
 interface OldTenantDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(tenant: TenantUtils)
+    fun insert(oldTenant: OldTenantUtils)
 
 
     @Update
-    fun update(tenant: TenantUtils)
+    fun update(oldTenant: OldTenantUtils)
 
     @Delete
-    fun delete(tenant: TenantUtils)
+    fun delete(oldTenant: OldTenantUtils)
+
+    @Query("SELECT * FROM Old_Tenants ORDER BY Building_Name ASC")
+    fun getAllOldTenant(): List<OldTenantUtils>
 }

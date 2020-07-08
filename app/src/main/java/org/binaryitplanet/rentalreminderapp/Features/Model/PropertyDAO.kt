@@ -21,4 +21,8 @@ interface PropertyDAO {
 
     @Query("SELECT * FROM Property WHERE ID == :id")
     fun getPropertyById(id: Long): PropertyUtils
+
+
+    @Query("SELECT COUNT(ID) FROM Property WHERE Property_Status == :status")
+    fun countTotalPropertyByStatus(status: Boolean): Int
 }

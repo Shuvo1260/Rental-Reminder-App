@@ -13,17 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.ParticularListAdapter
+import org.binaryitplanet.rentalreminderapp.Features.Presentar.OldTenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.ParticularPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.PropertyPresenterIml
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
-import org.binaryitplanet.rentalreminderapp.Utils.Config
-import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
-import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
-import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
+import org.binaryitplanet.rentalreminderapp.Utils.*
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
 
-class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantView {
+class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantView, OldTenantView {
 
     private val TAG = "ViewProperty"
 
@@ -46,7 +44,14 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
 
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.leave) {
-                leave()
+                if (tenantUtils == null) {
+                    Toast.makeText(
+                        this,
+                        Config.NO_TENANT,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }else
+                    leave()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
@@ -142,35 +147,66 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
     }
 
     private fun leave() {
-//        Log.d(TAG, "Leaving ")
-//
-//        val builder = AlertDialog.Builder(this)
-//
-//        builder.setTitle(Config.LEAVING_TENANT_TITLE)
-//        builder.setMessage(Config.LEAVING_TENANT_MESSAGE)
-//
-//        builder.setIcon(R.drawable.ic_launcher)
-//
-//        builder.setPositiveButton(
-//            Config.YES_MESSAGE
-//        ){
-//            dialog: DialogInterface?, which: Int ->
-//
-//            tenantUtils.propertyStatus = false
-//
-//            val presenter = TenantPresenterIml(this, this)
-//            presenter.updateData(tenantUtils)
-//        }
-//
-//        builder.setNegativeButton(
-//            Config.NO_MESSAGE
-//        ){
-//            dialog: DialogInterface?, which: Int ->
-//        }
-//
-//        val alertDialog = builder.create()
-//        alertDialog.show()
+        Log.d(TAG, "Leaving ")
 
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(Config.LEAVING_TENANT_TITLE)
+        builder.setMessage(Config.LEAVING_TENANT_MESSAGE)
+
+        builder.setIcon(R.drawable.ic_launcher)
+
+        builder.setPositiveButton(
+            Config.YES_MESSAGE
+        ){
+            dialog: DialogInterface?, which: Int ->
+
+            var oldTenant = OldTenantUtils(
+                null,
+                tenantUtils?.id,
+                propertyUtils.buildingName,
+                propertyUtils.address!!,
+                tenantUtils?.tenantName!!,
+                tenantUtils?.phoneNumber!!,
+                tenantUtils?.joinDate!!,
+                tenantUtils?.idProof!!,
+                tenantUtils?.totalDebit!!,
+                tenantUtils?.totalCredit!!
+
+            )
+
+
+            val presenter = OldTenantPresenterIml(this, this)
+            presenter.deleteData(oldTenant, propertyUtils, tenantUtils!!)
+        }
+
+        builder.setNegativeButton(
+            Config.NO_MESSAGE
+        ){
+            dialog: DialogInterface?, which: Int ->
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+    }
+
+    override fun onDeleteOldTenant(status: Boolean) {
+        super.onDeleteOldTenant(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     // Marking as old tenant

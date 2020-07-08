@@ -14,6 +14,7 @@ class Config {
         val SHARED_PREFERENCE = "SharedPreference"
         val FIRST_REMINDER = "FirstReminder"
         val RENEW_DATE = "Renew date: "
+        val NO_TENANT = "No tenant exist to leave"
 
         val SUCCESS_MESSAGE = "Success"
         val FAILED_MESSAGE  = "Failed"

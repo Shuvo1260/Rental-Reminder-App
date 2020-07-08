@@ -75,7 +75,34 @@ class PropertyPresenterIml(
     }
 
     override fun totalRantReceivedThisMonth() {
-        //
+
+        try {
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+            val calendar = Calendar.getInstance()
+
+
+            val months = context.resources.getStringArray(R.array.months)
+
+            val month = months[calendar.get(Calendar.MONTH)]
+            val year = calendar.get(Calendar.YEAR)
+
+
+            var credit = 0
+            var debit = 0
+
+            credit = databaseManager.getParticularDAO().getSumOfCreditDebitByMonth(month, year, "Credit")
+            debit = databaseManager.getParticularDAO().getSumOfCreditDebitByMonth(month, year, "Debit")
+
+
+
+            Log.d(TAG, "Month: $month Credit: $credit Debit: $debit")
+            view?.onTotalRantReceivedThisMonth(
+                credit - debit
+            )
+        }catch (e: Exception) {
+            Log.d(TAG, "TenantFetchException: ${e.message}")
+        }
     }
 
 

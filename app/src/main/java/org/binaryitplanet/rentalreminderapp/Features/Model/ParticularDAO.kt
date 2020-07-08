@@ -25,8 +25,8 @@ interface ParticularDAO {
 //
 //
 //
-//    @Query("SELECT SUM(Amount) FROM Particulars WHERE Month == :month AND Year == :year AND Transaction_type == :type")
-//    fun getSumOfCreditDebitByMonth(month: String, year: Int, type: String): Int
+    @Query("SELECT SUM(Amount) FROM Particulars WHERE Month == :month AND Year == :year AND Transaction_type == :type")
+    fun getSumOfCreditDebitByMonth(month: String, year: Int, type: String): Int
 //
 //
 //    @Query("SELECT COUNT(DISTINCT User_ID) FROM Particulars WHERE Month == :month AND Year == :year AND Transaction_type == :type")

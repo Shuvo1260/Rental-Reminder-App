@@ -16,6 +16,9 @@ interface PropertyDAO {
     @Delete
     fun delete(property: PropertyUtils)
 
+    @Query("DELETE FROM Property WHERE ID == :id")
+    fun deletePropertyById(id: Long)
+
     @Query("SELECT * FROM Property ORDER BY Building_Name ASC")
     fun getAllProperty(): List<PropertyUtils>
 

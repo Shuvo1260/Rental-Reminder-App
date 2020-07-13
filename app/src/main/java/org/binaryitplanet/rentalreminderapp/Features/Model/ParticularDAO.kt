@@ -18,6 +18,9 @@ interface ParticularDAO {
 
     @Query("SELECT * FROM Particulars WHERE Tenant_ID == :tenantId ORDER BY ID DESC")
     fun getParticularsByUserId(tenantId: Long): List<ParticularUtils>
+
+    @Query("DELETE FROM Particulars WHERE Tenant_ID == :tenantId")
+    fun deleteParticularsByUserId(tenantId: Long)
 //
 //
 //    @Query("SELECT * FROM Particulars")

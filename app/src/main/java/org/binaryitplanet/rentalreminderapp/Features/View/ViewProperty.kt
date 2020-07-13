@@ -20,6 +20,7 @@ import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIm
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.*
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewPropertyBinding
+import java.lang.Exception
 
 class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantView, OldTenantView {
 
@@ -53,6 +54,10 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
                     ).show()
                 }else
                     leave()
+            } else if(it.itemId == R.id.editProperty) {
+                editProperty()
+            } else if (it.itemId == R.id.deleteProperty) {
+                deleteProperty()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
@@ -71,6 +76,66 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
                 overridePendingTransition(R.anim.lefttoright, R.anim.lefttoright)
             }
         }
+    }
+
+    // Deleting property permanently
+    private fun deleteProperty() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(Config.DELETE_PROPERTY_TITLE)
+        builder.setMessage(Config.DELETE_PROPERTY_MESSAGE)
+
+        builder.setIcon(R.drawable.ic_launcher)
+
+        builder.setPositiveButton(
+            Config.YES_MESSAGE
+        ){
+                dialog: DialogInterface?, which: Int ->
+
+            try {
+
+                Log.d(TAG, "DeletingProperty")
+
+                var propertyPresenter = PropertyPresenterIml(this, this)
+                propertyPresenter.deleteData(propertyUtils, tenantUtils)
+
+                Log.d(TAG, "DeletingProperty")
+            }catch (e: Exception) {
+                Log.d(TAG, "DeletingException: ${e.message}")
+            }
+        }
+
+        builder.setNegativeButton(
+            Config.NO_MESSAGE
+        ){
+                dialog: DialogInterface?, which: Int ->
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    override fun onPropertyDelete(status: Boolean) {
+        super.onPropertyDelete(status)
+
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun editProperty() {
+        //
     }
 
     override fun onResume() {
@@ -114,8 +179,8 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
         super.onParticularFetchSuccess(particularList)
         Log.d(TAG, "ParticularList: $particularList")
 
-        this.particularList = particularList as ArrayList<ParticularUtils>
 
+        this.particularList = particularList as ArrayList<ParticularUtils>
         val particularAdapter = ParticularListAdapter(
             this,
             this.particularList,

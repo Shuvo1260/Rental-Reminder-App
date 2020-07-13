@@ -8,5 +8,7 @@ interface PropertyView {
     fun onPropertyAdd(status: Boolean){}
     fun onPropertyUpdate(status: Boolean){}
 
+    fun onPropertyDelete(status: Boolean){}
+
     fun onTotalRantReceivedThisMonth(totalRant: Int){}
 }

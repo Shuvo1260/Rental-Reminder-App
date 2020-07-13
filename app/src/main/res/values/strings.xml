@@ -14,6 +14,8 @@
     <string name="emptyTenant">No tenant</string>
     <string name="emptyNumber">No number</string>
     <string name="emptyIdProof">No ID proof</string>
+    <string name="editProperty">Edit property</string>
+    <string name="deleteProperty">Delete property</string>
 
     <!--    Hints-->
 

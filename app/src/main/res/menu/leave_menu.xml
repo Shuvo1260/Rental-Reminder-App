@@ -8,6 +8,18 @@
             android:title="@string/leave"
             app:showAsAction="always"
             />
+        <item
+            android:id="@+id/editProperty"
+            android:icon="@drawable/ic_write"
+            android:title="@string/editProperty"
+            app:showAsAction="never"
+            />
+        <item
+            android:id="@+id/deleteProperty"
+            android:icon="@drawable/ic_delete"
+            android:title="@string/deleteProperty"
+            app:showAsAction="never"
+            />
     </group>
 
 </menu>

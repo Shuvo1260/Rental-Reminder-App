@@ -37,6 +37,25 @@ class PropertyPresenterIml(
         }
     }
 
+    override fun deleteData(propertyUtils: PropertyUtils, tenantUtils: TenantUtils?) {
+        try {
+            var databaseManager = DatabaseManager.getInstance(context)!!
+
+            databaseManager.getPropertyDAO().delete(propertyUtils)
+
+            if (!tenantUtils?.tenantName.isNullOrEmpty()) {
+                databaseManager.getTenantDAO().delete(tenantUtils!!)
+
+                databaseManager.getParticularDAO().deleteParticularsByUserId(tenantUtils.id!!)
+            }
+
+            view?.onPropertyDelete(true)
+        }catch (e: Exception) {
+            Log.d(TAG, "PropertyDeleteError: ${e.message}")
+            view?.onPropertyDelete(false)
+        }
+    }
+
     override fun saveData(propertyUtils: PropertyUtils) {
         try{
             var databaseManager = DatabaseManager.getInstance(context)
@@ -104,6 +123,8 @@ class PropertyPresenterIml(
             Log.d(TAG, "TenantFetchException: ${e.message}")
         }
     }
+
+
 
 
 }

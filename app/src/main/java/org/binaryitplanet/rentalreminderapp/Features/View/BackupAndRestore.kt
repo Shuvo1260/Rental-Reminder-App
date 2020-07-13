@@ -1,11 +1,13 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import org.binaryitplanet.rentalreminderapp.Features.Model.DatabaseManager
 import org.binaryitplanet.rentalreminderapp.Utils.Config
@@ -59,18 +61,56 @@ class BackupAndRestore : Fragment() {
     private fun backupData() {
         binding.progress.visibility = View.VISIBLE
 
+
             try{
+
+//                var sdpath: String = ""
+//
+//                if(File("/storage/extSdCard/").exists())
+//                {
+//                    sdpath="/storage/extSdCard/"
+//                    Log.d(TAG, "Path: $sdpath")
+//                }
+//                if(File("/storage/sdcard1/").exists())
+//                {
+//                    sdpath="/storage/sdcard1/"
+//                    Log.d(TAG, "Path: $sdpath")
+//                }
+//                if(File("/storage/usbcard1/").exists())
+//                {
+//                    sdpath="/storage/usbcard1/"
+//                    Log.d(TAG, "Path: $sdpath")
+//                }
+//                if(File("/storage/sdcard0/").exists())
+//                {
+//                    sdpath="/storage/sdcard0/"
+//                    Log.d(TAG, "Path: $sdpath")
+//                }
+//                if(File("/mnt/sdcard/").exists())
+//                {
+//                    sdpath="/mnt/sdcard"
+//                    Log.d(TAG, "Path: $sdpath")
+//                }
+////                var sdpath1 = File(context?.getExternalFilesDir("/storage/emulated/0/"), Config.DATABASE_NAME_WITH_FORMAT)
+//                var sdpath1 = File("/storage/emulated/0/", Config.DATABASE_NAME_WITH_FORMAT)
+//                Log.d(TAG, "SDPath: $sdpath1")
+////                val db2 = File(sdpath, Config.DATABASE_NAME)
+////                db2.createNewFile()
+//                sdpath1.createNewFile()
+
+
                 Log.d(TAG, "Permitted")
                 DatabaseManager.getInstance(context!!)?.close()
 
                 val db = DatabaseManager.getInstance(context!!)?.openHelper?.writableDatabase?.path
                 val dbPath = File(db)
-                val dbShm = File("$db-shm")
-                val dbWal = File("$db-wal")
+//                val dbShm = File("$db-shm")
+//                val dbWal = File("$db-wal")
 
+//                copyDataFromOneToAnother(dbPath.path, sdpath1.path)
                 Log.d(TAG, "DB: + $db")
-                Log.d(TAG, "DB: + $dbShm")
-                Log.d(TAG, "DB: + $dbWal")
+//                Log.d(TAG, "DB: + $dbShm")
+//                Log.d(TAG, "DB: + $dbWal")
 
 
                 val db2 = File(Config.SD_CARD_PATH, Config.DATABASE_NAME)
@@ -122,6 +162,7 @@ class BackupAndRestore : Fragment() {
     // Restoring data
     private fun restoreData() {
         binding.progress.visibility = View.VISIBLE
+
 
         try{
             Log.d(TAG, "Permitted")

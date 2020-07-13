@@ -8,6 +8,7 @@ class Config {
         val TOOLBAR_TITLE_OLD_TENANT = "Old Tenant"
         val TOOLBAR_TITLE_BACKUP_AND_RESTORE = "Backup and Restore"
         val TOOLBAR_TITLE_ADD_PROPERTY = "Add property"
+        val TOOLBAR_TITLE_EDIT_PROPERTY = "Edit property"
         val TOOLBAR_TITLE_ADD_PARTICULAR= "Add particular"
         val TOOLBAR_TITLE_ADD_TENANT= "Add tenant"
         val LIST_CACHED_SIZE = 1000
@@ -37,6 +38,7 @@ class Config {
 
 //        Intent
         val PROPERTY_INFORMATION = "PropertyInformation"
+        val PROPERTY_EDIT_FLAG = "PropertyEditFlag"
         val TENANT_INFORMATION = "TenantInformation"
 //        Error
         val ERROR_INVALID_MESSAGE = "Inavlid value"

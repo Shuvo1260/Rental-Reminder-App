@@ -26,6 +26,8 @@ class AddProperty : AppCompatActivity(), PropertyView {
 
     private lateinit var buildingName: String
     private lateinit var address: String
+    private var editFlag = false
+    private lateinit var propertyUtils: PropertyUtils
 
 
 
@@ -39,10 +41,51 @@ class AddProperty : AppCompatActivity(), PropertyView {
 
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.done) {
-                if(checkValidity())
+                if(checkValidity() && editFlag)
+                    updateData()
+                else
                     saveData()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        editFlag = intent.getBooleanExtra(Config.PROPERTY_EDIT_FLAG, false)
+        if (editFlag) {
+            propertyUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as PropertyUtils
+            binding.address.setText(propertyUtils.address)
+            binding.buildingName.setText(propertyUtils.buildingName)
+            binding.toolbar.title = Config.TOOLBAR_TITLE_EDIT_PROPERTY
+        }
+    }
+
+    private fun updateData() {
+        Log.d(TAG, "Updating Data: $buildingName")
+
+        propertyUtils.buildingName = buildingName
+        propertyUtils.address = address
+
+        val presenter = PropertyPresenterIml(this, this)
+        presenter.updateData(propertyUtils)
+    }
+
+    override fun onPropertyUpdate(status: Boolean) {
+        super.onPropertyUpdate(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -68,7 +111,7 @@ class AddProperty : AppCompatActivity(), PropertyView {
     private fun saveData() {
         Log.d(TAG, "Saving Data: $buildingName")
 
-        val propertyUtils = PropertyUtils(
+        propertyUtils = PropertyUtils(
             null,
             buildingName,
             null,

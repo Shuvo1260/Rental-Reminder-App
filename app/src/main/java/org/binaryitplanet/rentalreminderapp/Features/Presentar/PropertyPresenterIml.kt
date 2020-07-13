@@ -72,7 +72,16 @@ class PropertyPresenterIml(
     }
 
     override fun updateData(propertyUtils: PropertyUtils) {
-        //
+        try {
+            var databaseManager = DatabaseManager.getInstance(context)!!
+
+            databaseManager.getPropertyDAO().update(propertyUtils)
+
+            view?.onPropertyUpdate(true)
+        }catch (e: Exception) {
+            Log.d(TAG, "UpdatingPropertyException: ${e.message}")
+            view?.onPropertyUpdate(false)
+        }
     }
 
     override fun fetchDataById(id: Long) {

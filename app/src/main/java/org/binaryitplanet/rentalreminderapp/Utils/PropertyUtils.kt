@@ -12,7 +12,7 @@ data class PropertyUtils(
     val id: Long?,
 
     @ColumnInfo(name = Config.COLUMN_BUILDING_NAME)
-    val buildingName: String,
+    var buildingName: String,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
     var tenantName: String?,

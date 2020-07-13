@@ -135,7 +135,11 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
     }
 
     private fun editProperty() {
-        //
+        val intent = Intent(this, AddProperty::class.java)
+        intent.putExtra(Config.PROPERTY_EDIT_FLAG, true)
+        intent.putExtra(Config.PROPERTY_INFORMATION, propertyUtils)
+        startActivity(intent)
+        overridePendingTransition(R.anim.lefttoright, R.anim.righttoleft)
     }
 
     override fun onResume() {

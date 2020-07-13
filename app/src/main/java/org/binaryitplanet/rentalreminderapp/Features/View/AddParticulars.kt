@@ -58,9 +58,10 @@ class AddParticulars : AppCompatActivity(), ParticularView {
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
 
-        setUpDropDown()
 
         getCurrentDate()
+
+        setUpDropDown()
 
         setUpIssueDate()
 
@@ -118,8 +119,8 @@ class AddParticulars : AppCompatActivity(), ParticularView {
 
         binding.type.setText(transactionTypes[0])
         binding.paymentType.setText(paymentTypes[0])
-        binding.month.setText(months[0])
-        binding.year.setText(years[0])
+        binding.month.setText(months[issueMonth])
+        binding.year.setText(issueYear.toString())
 
         binding.type.setAdapter(transactionAdapter)
         binding.paymentType.setAdapter(paymentAdapter)
@@ -166,8 +167,8 @@ class AddParticulars : AppCompatActivity(), ParticularView {
         issueYear = calendar.get(Calendar.YEAR)
     }
 
-    override fun onPerticularAdd(status: Boolean) {
-        super.onPerticularAdd(status)
+    override fun onParticularAdd(status: Boolean) {
+        super.onParticularAdd(status)
         if (status) {
             Toast.makeText(
                 this,

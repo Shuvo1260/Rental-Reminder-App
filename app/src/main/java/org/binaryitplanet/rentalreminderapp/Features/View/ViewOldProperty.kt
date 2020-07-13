@@ -110,14 +110,15 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
         particularPresenter.fetchData(tenantUtils.id!!)
     }
 
-    override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
-        super.onPerticularFetchSuccess(particularList)
+    override fun onParticularFetchSuccess(particularList: List<ParticularUtils>) {
+        super.onParticularFetchSuccess(particularList)
         Log.d(TAG, "ParticularList: $particularList")
 
         val particularAdapter = ParticularListAdapter(
             this,
             particularList as ArrayList<ParticularUtils>,
-            true
+            false,
+            this
         )
         binding.list.adapter = particularAdapter
         binding.list.layoutManager = LinearLayoutManager(this)

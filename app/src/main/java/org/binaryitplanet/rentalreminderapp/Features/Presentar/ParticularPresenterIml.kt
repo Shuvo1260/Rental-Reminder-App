@@ -5,6 +5,7 @@ import android.util.Log
 import org.binaryitplanet.rentalreminderapp.Features.Model.DatabaseManager
 import org.binaryitplanet.rentalreminderapp.Features.View.ParticularView
 import org.binaryitplanet.rentalreminderapp.R
+import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
 import org.binaryitplanet.rentalreminderapp.Utils.PropertyUtils
 import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
@@ -24,7 +25,7 @@ class ParticularPresenterIml(
         try {
             val databaseManager = DatabaseManager.getInstance(context)
 
-            view?.onPerticularFetchSuccess(
+            view?.onParticularFetchSuccess(
                 databaseManager?.getParticularDAO()?.getParticularsByUserId(userId)!!
             )
         }catch (e: Exception) {
@@ -71,11 +72,11 @@ class ParticularPresenterIml(
 
             databaseManager.getPropertyDAO().update(propertyUtils)
 
-            view?.onPerticularAdd(true)
+            view?.onParticularAdd(true)
         }catch (e: Exception) {
             Log.d(TAG, "ParticularSavingException: ${e.message}")
 
-            view?.onPerticularAdd(false)
+            view?.onParticularAdd(false)
         }
     }
 
@@ -102,5 +103,28 @@ class ParticularPresenterIml(
 
         return lastRant
 
+    }
+
+    override fun deleteData(tenantUtils: TenantUtils, particularUtils: ParticularUtils) {
+        try {
+
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+            databaseManager.getParticularDAO().delete(particularUtils)
+
+            if (particularUtils.transactionType == "Credit")
+                tenantUtils.totalCredit -= particularUtils.amount
+            else
+                tenantUtils.totalDebit -= particularUtils.amount
+
+
+            databaseManager.getTenantDAO().update(tenantUtils)
+
+            view?.onParticularDelete(true)
+
+        }catch (e: Exception) {
+            Log.d(TAG, "ParticularDeletingException: ${e.message}")
+            view?.onParticularDelete(false)
+        }
     }
 }

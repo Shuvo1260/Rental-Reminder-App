@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_particulars_item.view.*
+import org.binaryitplanet.rentalreminderapp.Features.View.ParticularView
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
 
 class ParticularListAdapter(
     val context: Context,
     val particularList: ArrayList<ParticularUtils>,
-    val isNew: Boolean
+    val isNew: Boolean,
+    var listener: ParticularView
 ):  RecyclerView.Adapter<ParticularListAdapter.ViewHolder>() {
 
 
@@ -51,6 +53,16 @@ class ParticularListAdapter(
             view.rupeeSign.setTextColor(
                 ContextCompat.getColor(context, R.color.red)
             )
+        }
+
+        if (!isNew) {
+            view.delete.visibility = View.GONE
+        } else {
+            view.delete.visibility = View.VISIBLE
+
+            view.delete.setOnClickListener {
+                listener.onParticularDeleteClick(position)
+            }
         }
 
         if (position == particularList.size -1) {

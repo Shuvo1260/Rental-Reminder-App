@@ -29,6 +29,7 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
 
     private var tenantUtils: TenantUtils? = null
     private lateinit var propertyUtils: PropertyUtils
+    private lateinit var particularList: ArrayList<ParticularUtils>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,14 +110,17 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
     }
 
 
-    override fun onPerticularFetchSuccess(particularList: List<ParticularUtils>) {
-        super.onPerticularFetchSuccess(particularList)
+    override fun onParticularFetchSuccess(particularList: List<ParticularUtils>) {
+        super.onParticularFetchSuccess(particularList)
         Log.d(TAG, "ParticularList: $particularList")
+
+        this.particularList = particularList as ArrayList<ParticularUtils>
 
         val particularAdapter = ParticularListAdapter(
             this,
-            particularList as ArrayList<ParticularUtils>,
-            false
+            this.particularList,
+            true,
+            this
         )
         binding.list.adapter = particularAdapter
         binding.list.layoutManager = LinearLayoutManager(this)
@@ -190,6 +194,55 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
         val alertDialog = builder.create()
         alertDialog.show()
 
+    }
+
+    override fun onParticularDeleteClick(position: Int) {
+        super.onParticularDeleteClick(position)
+        Log.d(TAG, "DeleteParticular: $position")
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle(Config.DELETE_PARTICULAR_TITLE)
+        builder.setMessage(Config.DELETE_PARTICULAR_MESSAGE)
+
+        builder.setIcon(R.drawable.ic_launcher)
+
+        builder.setPositiveButton(
+            Config.YES_MESSAGE
+        ){
+                dialog: DialogInterface?, which: Int ->
+
+
+
+            val presenter = ParticularPresenterIml(this, this)
+            presenter.deleteData(tenantUtils!!, particularList[position])
+        }
+
+        builder.setNegativeButton(
+            Config.NO_MESSAGE
+        ){
+                dialog: DialogInterface?, which: Int ->
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    override fun onParticularDelete(status: Boolean) {
+        super.onParticularDelete(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            fetchPropertyData(propertyUtils.id)
+        } else {
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onDeleteOldTenant(status: Boolean) {

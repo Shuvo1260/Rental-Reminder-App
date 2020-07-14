@@ -32,6 +32,7 @@ class Config {
         val DELETE_TENANT_MESSAGE = "Do you want to delete the tenant permanently?"
         val YES_MESSAGE = "Yes"
         val NO_MESSAGE = "No"
+        val REQUEST_CALL = 103
 
         val PROPERTY_STATUS_OCCUPIED = "Occupied"
         val PROPERTY_STATUS_UNOCCUPIED = "Unoccupied"

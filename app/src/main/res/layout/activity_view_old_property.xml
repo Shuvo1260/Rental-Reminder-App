@@ -73,6 +73,7 @@ tools:context=".Features.View.ViewOldProperty">
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_5sdp"
         android:text="9999999999999"
+        android:textIsSelectable="true"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/_12sdp"
         android:transitionName="@string/mobileNumberTransition"

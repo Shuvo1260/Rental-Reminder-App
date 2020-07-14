@@ -1,7 +1,11 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.Manifest
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +13,8 @@ import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.binaryitplanet.rentalreminderapp.Features.Adapter.ParticularListAdapter
@@ -48,6 +54,26 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
                     delete()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
+        }
+
+        binding.currentTenantPhone.setOnClickListener {
+            makeCall()
+        }
+    }
+
+
+    // Making a phone call
+    private fun makeCall() {
+        if (!tenantUtils?.phoneNumber.isNullOrEmpty()) {
+            val intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:${tenantUtils?.phoneNumber}")
+            if(ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.CALL_PHONE), Config.REQUEST_CALL)
+            } else {
+                startActivity(intent)
+            }
         }
     }
 

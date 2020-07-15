@@ -1,6 +1,7 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -63,6 +64,10 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
                 editProperty()
             } else if (it.itemId == R.id.deleteProperty) {
                 deleteProperty()
+            } else if(it.itemId == R.id.editTenant) {
+                editTenant()
+            } else if(it.itemId == R.id.editRenewalDate) {
+                editRenewalDate()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
@@ -87,6 +92,24 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
             // Calling phone call method
             makeCall()
         }
+    }
+
+    // Editing renewal date
+    private fun editRenewalDate() {
+        val dates = propertyUtils.renewDate?.split("/")!!
+        DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            propertyUtils.renewDate = "%02d/%02d/%04d".format(
+                dayOfMonth, month+1, year
+            )
+
+            val presenter = PropertyPresenterIml(this, this)
+            presenter.updateData(propertyUtils)
+
+        }, dates[2].toInt(), dates[1].toInt()-1, dates[0].toInt()).show()
+    }
+
+    private fun editTenant() {
+        //
     }
 
     // Making a phone call
@@ -380,7 +403,7 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
 
     // Toolbar menu setting
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.leave_menu, menu)
+        menuInflater.inflate(R.menu.view_property_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
     private fun setUpToolbar() {

@@ -24,7 +24,6 @@ import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
 import org.binaryitplanet.rentalreminderapp.Utils.OldTenantUtils
 import org.binaryitplanet.rentalreminderapp.Utils.ParticularUtils
-import org.binaryitplanet.rentalreminderapp.Utils.TenantUtils
 import org.binaryitplanet.rentalreminderapp.databinding.ActivityViewOldPropertyBinding
 
 class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
@@ -52,6 +51,8 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.delete) {
                     delete()
+            } else if(it.itemId == R.id.restore) {
+                restore()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
@@ -59,6 +60,10 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
         binding.currentTenantPhone.setOnClickListener {
             makeCall()
         }
+    }
+
+    private fun restore() {
+        Log.d(TAG, "Restoring Tenant")
     }
 
 
@@ -166,7 +171,7 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
 
     // Toolbar menu setting
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.delete_menu, menu)
+        menuInflater.inflate(R.menu.view_old_tenant_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
     private fun setUpToolbar() {

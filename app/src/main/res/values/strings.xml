@@ -16,6 +16,8 @@
     <string name="emptyIdProof">No ID proof</string>
     <string name="editProperty">Edit property</string>
     <string name="deleteProperty">Delete property</string>
+    <string name="editTenant">Edit tenant</string>
+    <string name="editRenewalDate">Edit renewal</string>
 
     <!--    Hints-->
 

@@ -58,6 +58,8 @@ class AddProperty : AppCompatActivity(), PropertyView {
             binding.address.setText(propertyUtils.address)
             binding.buildingName.setText(propertyUtils.buildingName)
             binding.toolbar.title = Config.TOOLBAR_TITLE_EDIT_PROPERTY
+
+            binding.buildingName.setSelection(propertyUtils.buildingName.length)
         }
     }
 

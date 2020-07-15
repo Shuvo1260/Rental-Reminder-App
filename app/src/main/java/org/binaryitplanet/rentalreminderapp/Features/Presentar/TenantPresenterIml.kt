@@ -80,19 +80,25 @@ class TenantPresenterIml(
 
     override fun updateData(tenantUtils: TenantUtils) {
         super.updateData(tenantUtils)
-//
-//        try {
-//            Log.d(TAG, "Updating: $tenantUtils")
-//            val databaseManager = DatabaseManager.getInstance(context)
-//
-//            databaseManager?.getTenantDAO()?.update(tenantUtils)
-//
-//            view?.onPropertyUpdate(true)
-//        }catch (e: Exception) {
-//            Log.d(TAG, "PropertyUpdatingException: ${e.message}")
-//
-//            view?.onPropertyUpdate(false)
-//        }
+
+        try {
+            Log.d(TAG, "Updating: $tenantUtils")
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+            databaseManager.getTenantDAO().update(tenantUtils)
+
+            var propertyUtils = databaseManager.getPropertyDAO().getPropertyById(tenantUtils.buildingId!!)
+
+            propertyUtils.renewDate = getRenewDate(tenantUtils.joinDate)
+
+            databaseManager.getPropertyDAO().update(propertyUtils)
+
+            view?.onTenantUpdate(true)
+        }catch (e: Exception) {
+            Log.d(TAG, "PropertyUpdatingException: ${e.message}")
+
+            view?.onTenantUpdate(false)
+        }
     }
 
     override fun buildingList() {

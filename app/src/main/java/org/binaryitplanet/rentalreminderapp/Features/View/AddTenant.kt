@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import kotlinx.android.synthetic.main.activity_add_tenant.view.*
 import org.binaryitplanet.rentalreminderapp.Features.Presentar.TenantPresenterIml
 import org.binaryitplanet.rentalreminderapp.R
 import org.binaryitplanet.rentalreminderapp.Utils.Config
@@ -30,6 +31,9 @@ class AddTenant : AppCompatActivity(), TenantView {
     private lateinit var tenantName: String
     private lateinit var phoneNumber: String
     private lateinit var idProof: String
+    private var isEditEnabled: Boolean = false
+
+    private lateinit var tenantUtils: TenantUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +46,66 @@ class AddTenant : AppCompatActivity(), TenantView {
 
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.done) {
-                saveData()
+                if (isEditEnabled)
+                    update()
+                else
+                    saveData()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }
 
         getCurrentDate()
 
-        setUpJoinedDate()
-
         setUpJoinDateListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isEditEnabled = intent.getBooleanExtra(Config.TENANT_EDIT_FLAG, false)
+
+        if (isEditEnabled) {
+            tenantUtils = intent.getSerializableExtra(Config.TENANT_INFORMATION) as TenantUtils
+
+            Log.d(TAG, "Tenant: $tenantUtils")
+
+            binding.tenantName.setText(tenantUtils.tenantName)
+            binding.phoneNumber.setText(tenantUtils.phoneNumber)
+            binding.idProof.setText(tenantUtils.idProof)
+
+            binding.tenantName.setSelection(tenantUtils.tenantName.length)
+
+
+            var dates = tenantUtils.joinDate.split("/")
+
+            joinDay = dates[0].toInt()
+            joinMonth = dates[1].toInt()-1
+            joinYear = dates[2].toInt()
+
+        }
+
+        setUpJoinedDate()
+    }
+
+    private fun update() {
+        Log.d(TAG, "UpdatingTenant")
+
+        if(checkValidity()) {
+
+            try {
+                tenantUtils = intent.getSerializableExtra(Config.TENANT_INFORMATION) as TenantUtils
+
+                tenantUtils.tenantName = tenantName
+                tenantUtils.phoneNumber = phoneNumber
+                tenantUtils.idProof = idProof
+                tenantUtils.joinDate = joinDate
+
+                val presenter = TenantPresenterIml(this, this)
+                presenter.updateData(tenantUtils)
+            } catch (e: Exception) {
+                Log.d(TAG, "UpdatingTenantException: ${e.message}")
+            }
+        }
+
     }
 
     private fun saveData() {
@@ -65,7 +119,7 @@ class AddTenant : AppCompatActivity(), TenantView {
             property.phoneNumber = phoneNumber
             property.propertyStatus = true
 
-            var tenantUtils = TenantUtils(
+            tenantUtils = TenantUtils(
                 null,
                 property.id,
                 tenantName,
@@ -84,6 +138,25 @@ class AddTenant : AppCompatActivity(), TenantView {
 
     override fun onTenantAdd(status: Boolean) {
         super.onTenantAdd(status)
+        if (status) {
+            Toast.makeText(
+                this,
+                Config.SUCCESS_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+
+            Toast.makeText(
+                this,
+                Config.FAILED_MESSAGE,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun onTenantUpdate(status: Boolean) {
+        super.onTenantUpdate(status)
         if (status) {
             Toast.makeText(
                 this,

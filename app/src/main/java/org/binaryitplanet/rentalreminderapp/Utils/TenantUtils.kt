@@ -16,16 +16,16 @@ data class TenantUtils(
     val buildingId: Long?,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
-    val tenantName: String,
+    var tenantName: String,
 
     @ColumnInfo(name = Config.COLUMN_PHONE_NUMBER)
-    val phoneNumber: String,
+    var phoneNumber: String,
 
     @ColumnInfo(name = Config.COLUMN_JOIN_DATE)
-    val joinDate: String,
+    var joinDate: String,
 
     @ColumnInfo(name = Config.COLUMN_ID_PROOF)
-    val idProof: String,
+    var idProof: String,
 
     @ColumnInfo(name = Config.COLUMN_TOTAL_DEBIT)
     var totalDebit: Int,

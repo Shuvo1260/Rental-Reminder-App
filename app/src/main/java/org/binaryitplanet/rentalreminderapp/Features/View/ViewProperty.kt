@@ -109,7 +109,11 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
     }
 
     private fun editTenant() {
-        //
+        val intent = Intent(this, AddTenant::class.java)
+        intent.putExtra(Config.TENANT_EDIT_FLAG, true)
+        intent.putExtra(Config.TENANT_INFORMATION, tenantUtils)
+        startActivity(intent)
+        overridePendingTransition(R.anim.lefttoright, R.anim.righttoleft)
     }
 
     // Making a phone call

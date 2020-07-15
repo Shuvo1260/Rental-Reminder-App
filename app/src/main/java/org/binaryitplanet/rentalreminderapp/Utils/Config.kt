@@ -40,6 +40,7 @@ class Config {
 //        Intent
         val PROPERTY_INFORMATION = "PropertyInformation"
         val PROPERTY_EDIT_FLAG = "PropertyEditFlag"
+        val TENANT_EDIT_FLAG = "TenantEditFlag"
         val TENANT_INFORMATION = "TenantInformation"
 //        Error
         val ERROR_INVALID_MESSAGE = "Inavlid value"

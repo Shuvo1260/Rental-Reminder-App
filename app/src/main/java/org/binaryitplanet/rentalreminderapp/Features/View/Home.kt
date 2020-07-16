@@ -73,8 +73,8 @@ class Home : Fragment(), PropertyView {
         binding.list.layoutManager = LinearLayoutManager(context)
         binding.list.setItemViewCacheSize(Config.LIST_CACHED_SIZE)
 
-//        if (propertyList.isNotEmpty())
-//            checkReminder()
+        if (propertyList.isNotEmpty())
+            checkReminder()
     }
 
     private fun checkReminder() {

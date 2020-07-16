@@ -22,7 +22,6 @@ class Config {
         val FAILED_MESSAGE  = "Failed"
         val LAST_RENT_EMPTY_MESSAGE = "No rent received yet"
         val LAST_RENT_MESSAGE = "Last rent received"
-        val PREVIOUS_TENANT_TITLE = "Previous tenant name"
         val LEAVING_TENANT_TITLE = "Leaving tenant"
         val DELETE_TENANT_TITLE = "Delete tenant"
         val DELETE_PARTICULAR_TITLE = "Delete particular"
@@ -34,6 +33,7 @@ class Config {
         val YES_MESSAGE = "Yes"
         val NO_MESSAGE = "No"
         val REQUEST_CALL = 103
+        val NO_TENANT_MESSAGE = "No tenant exists"
 
         val PROPERTY_STATUS_OCCUPIED = "Occupied"
         val PROPERTY_STATUS_UNOCCUPIED = "Unoccupied"

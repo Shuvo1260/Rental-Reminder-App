@@ -90,7 +90,8 @@ class TenantPresenterIml(
 
             var propertyUtils = databaseManager.getPropertyDAO().getPropertyById(tenantUtils.buildingId!!)
 
-            propertyUtils.renewDate = getRenewDate(tenantUtils.joinDate)
+            propertyUtils.tenantName = tenantUtils.tenantName
+            propertyUtils.phoneNumber = tenantUtils.phoneNumber
 
             databaseManager.getPropertyDAO().update(propertyUtils)
 

@@ -65,9 +65,25 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
             } else if (it.itemId == R.id.deleteProperty) {
                 deleteProperty()
             } else if(it.itemId == R.id.editTenant) {
-                editTenant()
+                if (propertyUtils.propertyStatus)
+                    editTenant()
+                else {
+                    Toast.makeText(
+                        this,
+                        Config.NO_TENANT_MESSAGE,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else if(it.itemId == R.id.editRenewalDate) {
-                editRenewalDate()
+                if (propertyUtils.propertyStatus)
+                    editRenewalDate()
+                else {
+                    Toast.makeText(
+                        this,
+                        Config.NO_TENANT_MESSAGE,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)
         }

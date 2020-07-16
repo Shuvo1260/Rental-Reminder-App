@@ -21,7 +21,7 @@ class PropertyPresenterIml(
 
     override fun fetchData(propertyStatus: Boolean) {
         try{
-            var databaseManager = DatabaseManager.getInstance(context)
+            var databaseManager = DatabaseManager.getInstance(context)!!
 
 
 
@@ -32,6 +32,7 @@ class PropertyPresenterIml(
             )
 
             Log.d(TAG, "PropertyFetchingSuccess: ")
+            
         }catch (e: Exception) {
             Log.d(TAG, "PropertyFetchingError: ${e.message}")
         }
@@ -50,6 +51,7 @@ class PropertyPresenterIml(
             }
 
             view?.onPropertyDelete(true)
+            
         }catch (e: Exception) {
             Log.d(TAG, "PropertyDeleteError: ${e.message}")
             view?.onPropertyDelete(false)
@@ -58,13 +60,14 @@ class PropertyPresenterIml(
 
     override fun saveData(propertyUtils: PropertyUtils) {
         try{
-            var databaseManager = DatabaseManager.getInstance(context)
+            var databaseManager = DatabaseManager.getInstance(context)!!
 
             databaseManager?.getPropertyDAO()?.insert(propertyUtils)
 
             view?.onPropertyAdd(true)
 
             Log.d(TAG, "PropertySavingSuccess: $propertyUtils")
+            
         }catch (e: Exception) {
             Log.d(TAG, "PropertySavingError: ${e.message}")
             view?.onPropertyAdd(false)
@@ -78,6 +81,7 @@ class PropertyPresenterIml(
             databaseManager.getPropertyDAO().update(propertyUtils)
 
             view?.onPropertyUpdate(true)
+            
         }catch (e: Exception) {
             Log.d(TAG, "UpdatingPropertyException: ${e.message}")
             view?.onPropertyUpdate(false)
@@ -86,7 +90,7 @@ class PropertyPresenterIml(
 
     override fun fetchDataById(id: Long) {
         try{
-            var databaseManager = DatabaseManager.getInstance(context)
+            var databaseManager = DatabaseManager.getInstance(context)!!
 
 
 
@@ -97,6 +101,7 @@ class PropertyPresenterIml(
             )
 
             Log.d(TAG, "PropertyFetchingSuccess: ")
+            
         }catch (e: Exception) {
             Log.d(TAG, "PropertyFetchingError: ${e.message}")
         }
@@ -128,6 +133,7 @@ class PropertyPresenterIml(
             view?.onTotalRantReceivedThisMonth(
                 credit - debit
             )
+            
         }catch (e: Exception) {
             Log.d(TAG, "TenantFetchException: ${e.message}")
         }

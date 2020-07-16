@@ -21,6 +21,9 @@ interface ParticularDAO {
 
     @Query("DELETE FROM Particulars WHERE Tenant_ID == :tenantId")
     fun deleteParticularsByUserId(tenantId: Long)
+
+    @Query("SELECT MAX (Rent_date_milli) FROM Particulars WHERE Tenant_ID == :tenantId")
+    fun getMaxLastRentMilli(tenantId: Long): Long
 //
 //
 //    @Query("SELECT * FROM Particulars")

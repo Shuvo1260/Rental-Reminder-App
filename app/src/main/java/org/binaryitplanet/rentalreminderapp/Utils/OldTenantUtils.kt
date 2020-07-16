@@ -37,7 +37,7 @@ data class OldTenantUtils(
     val renewDate: String,
 
     @ColumnInfo(name = Config.COLUMN_LAST_RENT_RECEIVED)
-    val lastRent: String,
+    val lastRent: String?,
 
     @ColumnInfo(name = Config.COLUMN_ID_PROOF)
     val idProof: String,

@@ -60,6 +60,7 @@ class TenantPresenterIml(
 
 
             view?.onTenantAdd(true)
+            
         }catch (e: Exception) {
             Log.d(TAG, "TenantSavingException: ${e.message}")
 
@@ -94,6 +95,7 @@ class TenantPresenterIml(
             databaseManager.getPropertyDAO().update(propertyUtils)
 
             view?.onTenantUpdate(true)
+            
         }catch (e: Exception) {
             Log.d(TAG, "PropertyUpdatingException: ${e.message}")
 
@@ -170,6 +172,7 @@ class TenantPresenterIml(
                     .getTenantDAO()
                     .getTenantByBuildingId(id)
             )
+            
         }catch (e: Exception) {
             Log.d(TAG, "TenantFetchingException: ${e.message}")
         }

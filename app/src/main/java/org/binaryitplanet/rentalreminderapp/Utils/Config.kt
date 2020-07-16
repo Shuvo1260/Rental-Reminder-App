@@ -18,6 +18,7 @@ class Config {
         val NO_TENANT = "No tenant exist to leave"
 
         val SUCCESS_MESSAGE = "Success"
+        val NEW_TENANT_EXIST_MESSAGE = "Already new tenant is added"
         val FAILED_MESSAGE  = "Failed"
         val LAST_RENT_EMPTY_MESSAGE = "No rent received yet"
         val LAST_RENT_MESSAGE = "Last rent received"

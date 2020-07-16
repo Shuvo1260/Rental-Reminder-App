@@ -64,6 +64,29 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
 
     private fun restore() {
         Log.d(TAG, "Restoring Tenant")
+
+        var presenter = OldTenantPresenterIml(this, this)
+
+        presenter.restoreData(tenantUtils)
+
+    }
+
+    override fun onRestoreOldTenant(status: Boolean, message: String) {
+        super.onRestoreOldTenant(status, message)
+        if (status) {
+            Toast.makeText(
+                this,
+                message,
+                Toast.LENGTH_SHORT
+            ).show()
+            onBackPressed()
+        } else {
+            Toast.makeText(
+                this,
+                message,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 
@@ -138,7 +161,7 @@ class ViewOldProperty : AppCompatActivity(), ParticularView, OldTenantView {
             this,
             this
         )
-        particularPresenter.fetchData(tenantUtils.id!!)
+        particularPresenter.fetchData(tenantUtils.tenantId!!)
     }
 
     override fun onParticularFetchSuccess(particularList: List<ParticularUtils>) {

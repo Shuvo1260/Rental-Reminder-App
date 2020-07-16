@@ -9,4 +9,5 @@ interface OldTenantPresentar {
     fun saveData(oldTenantUtils: OldTenantUtils){}
     fun deleteData(oldTenantUtils: OldTenantUtils, propertyUtils: PropertyUtils, tenantUtils: TenantUtils){}
     fun deleteParmanentData(oldTenantUtils: OldTenantUtils){}
+    fun restoreData(oldTenantUtils: OldTenantUtils){}
 }

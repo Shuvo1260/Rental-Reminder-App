@@ -13,7 +13,7 @@ data class TenantUtils(
     val id: Long?,
 
     @ColumnInfo(name = Config.COLUMN_BUILDING_ID)
-    val buildingId: Long?,
+    var buildingId: Long?,
 
     @ColumnInfo(name = Config.COLUMN_TENANT_NAME)
     var tenantName: String,

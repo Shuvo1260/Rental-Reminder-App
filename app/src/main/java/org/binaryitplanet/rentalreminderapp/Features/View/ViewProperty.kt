@@ -288,25 +288,36 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
         ){
             dialog: DialogInterface?, which: Int ->
 
-            var oldTenant = OldTenantUtils(
-                null,
-                propertyUtils.id,
-                tenantUtils?.id,
-                propertyUtils.buildingName,
-                propertyUtils.address!!,
-                tenantUtils?.tenantName!!,
-                tenantUtils?.phoneNumber!!,
-                tenantUtils?.joinDate!!,
-                propertyUtils.renewDate!!,
-                propertyUtils.lastRant!!,
-                tenantUtils?.idProof!!,
-                tenantUtils?.totalDebit!!,
-                tenantUtils?.totalCredit!!
-            )
+            Log.d(TAG, "OldTenant: $propertyUtils")
+
+            try {
+                var oldTenant = OldTenantUtils(
+                    null,
+                    propertyUtils.id,
+                    tenantUtils?.id,
+                    propertyUtils.buildingName,
+                    propertyUtils.address!!,
+                    tenantUtils?.tenantName!!,
+                    tenantUtils?.phoneNumber!!,
+                    tenantUtils?.joinDate!!,
+                    propertyUtils.renewDate!!,
+                    propertyUtils.lastRant,
+                    tenantUtils?.idProof!!,
+                    tenantUtils?.totalDebit!!,
+                    tenantUtils?.totalCredit!!
+                )
 
 
-            val presenter = OldTenantPresenterIml(this, this)
-            presenter.deleteData(oldTenant, propertyUtils, tenantUtils!!)
+                val presenter = OldTenantPresenterIml(this, this)
+                presenter.deleteData(oldTenant, propertyUtils, tenantUtils!!)
+            }catch (e: Exception) {
+                Log.d(TAG, "LeavingException: ${e.message}")
+                Toast.makeText(
+                    this,
+                    e.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         builder.setNegativeButton(

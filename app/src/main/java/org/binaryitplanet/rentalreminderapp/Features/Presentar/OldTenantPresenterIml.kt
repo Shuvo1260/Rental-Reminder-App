@@ -25,7 +25,7 @@ class OldTenantPresenterIml(
         super.fetchData()
 
         try {
-            val databaseManager = DatabaseManager.getInstance(context)
+            val databaseManager = DatabaseManager.getInstance(context)!!
 
             Log.d(TAG, "OldTenantFetching:")
 
@@ -35,11 +35,58 @@ class OldTenantPresenterIml(
                 getAllOldTenant()!!
             )
 
+            
 
         }catch (e: Exception) {
             Log.d(TAG, "OldTenantFetchingException: ${e.message}")
         }
 
+    }
+
+
+    override fun restoreData(oldTenantUtils: OldTenantUtils) {
+        super.restoreData(oldTenantUtils)
+
+        try {
+            Log.d(TAG, "Restoreing: $oldTenantUtils")
+
+
+
+            val databaseManager = DatabaseManager.getInstance(context)!!
+
+            var property = databaseManager
+                .getPropertyDAO().getPropertyById(oldTenantUtils.buildingId!!)
+
+            var tenant = databaseManager
+                .getTenantDAO().getTenantById(oldTenantUtils.tenantId!!)
+
+            if (property.tenantName.isNullOrEmpty()) {
+                property.tenantName = oldTenantUtils.tenantName
+                property.phoneNumber = oldTenantUtils.phoneNumber
+                property.propertyStatus = true
+                property.lastRant = oldTenantUtils.lastRent
+                property.renewDate = oldTenantUtils.renewDate
+                tenant.buildingId = property.id
+
+                databaseManager.getPropertyDAO()
+                    .update(property)
+
+                databaseManager.getOldTenantDAO()
+                    .delete(oldTenantUtils)
+
+                databaseManager.getTenantDAO()
+                    .update(tenant)
+                view?.onRestoreOldTenant(true, Config.SUCCESS_MESSAGE)
+
+            } else {
+                view?.onRestoreOldTenant(false, Config.NEW_TENANT_EXIST_MESSAGE)
+            }
+            
+
+        }catch (e: Exception) {
+            Log.d(TAG, "RestoringException: ${e.message}")
+            view?.onRestoreOldTenant(false, Config.FAILED_MESSAGE)
+        }
     }
 
     override fun deleteData(
@@ -64,7 +111,9 @@ class OldTenantPresenterIml(
 
             databaseManager.getPropertyDAO().update(propertyUtils)
 
-//            databaseManager.getTenantDAO().delete(tenantUtils)
+            tenantUtils.buildingId = 0
+
+            databaseManager.getTenantDAO().update(tenantUtils)
 
             databaseManager
                 .getOldTenantDAO()
@@ -73,6 +122,8 @@ class OldTenantPresenterIml(
 
             view?.onDeleteOldTenant(true)
             Log.d(TAG, "DeletingOldTenantData:  $oldTenantUtils")
+
+            
 
         }catch (e: Exception) {
             Log.d(TAG, "OldTenantDeleteException: ${e.message}")
@@ -102,6 +153,7 @@ class OldTenantPresenterIml(
 
             view?.onDeleteOldTenant(true)
             Log.d(TAG, "DeletingOldTenantData:  $oldTenantUtils")
+            
 
         }catch (e: Exception) {
             Log.d(TAG, "OldTenantDeleteException: ${e.message}")
@@ -127,6 +179,7 @@ class OldTenantPresenterIml(
 
 
             view?.onSaveOldTenant(true)
+            
         }catch (e: Exception) {
             Log.d(TAG, "OldTenantSavingException: ${e.message}")
 

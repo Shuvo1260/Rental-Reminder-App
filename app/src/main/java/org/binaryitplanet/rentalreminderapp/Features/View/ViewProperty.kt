@@ -290,16 +290,18 @@ class ViewProperty : AppCompatActivity(), PropertyView, ParticularView, TenantVi
 
             var oldTenant = OldTenantUtils(
                 null,
+                propertyUtils.id,
                 tenantUtils?.id,
                 propertyUtils.buildingName,
                 propertyUtils.address!!,
                 tenantUtils?.tenantName!!,
                 tenantUtils?.phoneNumber!!,
                 tenantUtils?.joinDate!!,
+                propertyUtils.renewDate!!,
+                propertyUtils.lastRant!!,
                 tenantUtils?.idProof!!,
                 tenantUtils?.totalDebit!!,
                 tenantUtils?.totalCredit!!
-
             )
 
 

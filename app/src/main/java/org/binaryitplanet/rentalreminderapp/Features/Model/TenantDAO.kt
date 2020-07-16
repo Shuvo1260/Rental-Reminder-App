@@ -25,6 +25,11 @@ interface TenantDAO {
 
     @Query("SELECT * FROM Tenants WHERE Building_ID == :buildingId")
     fun getTenantByBuildingId(buildingId: Long): TenantUtils
+
+    @Query("DELETE FROM Tenants WHERE ID == :id")
+    fun deleteTenantById(id: Long): Int
+
+
 //
 //    @Query("SELECT DISTINCT Building_Name FROM Tenants ORDER BY Building_Name ASC")
 //    fun getAllBuildings(): List<String>

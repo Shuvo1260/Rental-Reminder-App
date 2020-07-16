@@ -12,6 +12,9 @@ data class OldTenantUtils(
     @ColumnInfo(name = Config.COLUMN_ID)
     val id: Long?,
 
+    @ColumnInfo(name = Config.COLUMN_BUILDING_ID)
+    val buildingId: Long?,
+
     @ColumnInfo(name = Config.COLUMN_TENANT_ID)
     val tenantId: Long?,
 
@@ -29,6 +32,12 @@ data class OldTenantUtils(
 
     @ColumnInfo(name = Config.COLUMN_JOIN_DATE)
     val joinDate: String,
+
+    @ColumnInfo(name = Config.COLUMN_RENEW_DATE)
+    val renewDate: String,
+
+    @ColumnInfo(name = Config.COLUMN_LAST_RENT_RECEIVED)
+    val lastRent: String,
 
     @ColumnInfo(name = Config.COLUMN_ID_PROOF)
     val idProof: String,

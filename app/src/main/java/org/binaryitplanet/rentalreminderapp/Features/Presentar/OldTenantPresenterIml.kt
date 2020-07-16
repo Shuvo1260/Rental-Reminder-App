@@ -64,7 +64,7 @@ class OldTenantPresenterIml(
 
             databaseManager.getPropertyDAO().update(propertyUtils)
 
-            databaseManager.getTenantDAO().delete(tenantUtils)
+//            databaseManager.getTenantDAO().delete(tenantUtils)
 
             databaseManager
                 .getOldTenantDAO()
@@ -94,6 +94,10 @@ class OldTenantPresenterIml(
             databaseManager
                 .getOldTenantDAO()
                 .delete(oldTenantUtils)
+
+            databaseManager
+                .getTenantDAO()
+                .deleteTenantById(oldTenantUtils.tenantId!!)
 
 
             view?.onDeleteOldTenant(true)

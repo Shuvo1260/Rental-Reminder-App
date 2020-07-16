@@ -61,7 +61,7 @@ class Config {
 
 
 //        Database
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
         const val DATABASE_NAME = "Rental_Reminder"
         const val DATABASE_NAME_WITH_FORMAT = "Rental_Reminder.db"
         const val TABLE_NAME_TENANT = "Tenants"
@@ -94,6 +94,8 @@ class Config {
         const val COLUMN_LAST_ADDRESS = "Address"
         const val COLUMN_RENEW_DATE = "Renew_Date"
         const val COLUMN_JOIN_DATE = "Join_Date"
+        const val COLUMN_DATE_MILLI = "Date_milli"
+        const val COLUMN_RENT_DATE_MILLI = "Rent_date_milli"
 
 //        Backup And Restore section
         const val SD_CARD_PATH = "/sdcard/"

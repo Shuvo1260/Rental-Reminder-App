@@ -42,6 +42,9 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     private var issueDay: Int = 0
     private var issueMonth: Int = 0
     private var issueYear: Int = 0
+    private var dateMillis: Long = 0
+    private var rentDateMillis: Long = 0
+    private lateinit var months: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +83,9 @@ class AddParticulars : AppCompatActivity(), ParticularView {
     }
 
     private fun setUpIssueDate() {
+        dateMillis = issueYear * 10000L +
+                issueMonth * 100L +
+                issueDay
         issueDate = "%02d/%02d/%04d".format(
             issueDay,
             issueMonth+1,
@@ -90,7 +96,7 @@ class AddParticulars : AppCompatActivity(), ParticularView {
 
     private fun setUpDropDown() {
         var transactionTypes = resources.getStringArray(R.array.transactionType)
-        var months = resources.getStringArray(R.array.months)
+        months = resources.getStringArray(R.array.months)
         var years = resources.getStringArray(R.array.years)
         var paymentTypes = resources.getStringArray(R.array.paymentType)
 
@@ -134,6 +140,7 @@ class AddParticulars : AppCompatActivity(), ParticularView {
             tenantUtils = intent.getSerializableExtra(Config.TENANT_INFORMATION) as TenantUtils
             var propertyUtils = intent.getSerializableExtra(Config.PROPERTY_INFORMATION) as PropertyUtils
 
+            rentDateMillis = year?.toLong()!! * 100 + months.indexOf(month)
 
             val particularUtils = ParticularUtils(
                 null,
@@ -144,7 +151,9 @@ class AddParticulars : AppCompatActivity(), ParticularView {
                 date = issueDate!!,
                 month = month!!,
                 year = year?.toInt()!!,
-                remark = remark!!
+                remark = remark!!,
+                dateMilli = dateMillis,
+                rentDateMilli =  rentDateMillis
             )
             Log.d(TAG, "Utils: $propertyUtils, $tenantUtils and $particularUtils")
 

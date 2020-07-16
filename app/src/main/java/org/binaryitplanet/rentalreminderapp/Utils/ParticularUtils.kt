@@ -34,6 +34,12 @@ data class ParticularUtils(
     val amount: Int,
 
     @ColumnInfo(name = Config.COLUMN_REMARK)
-    val remark: String
+    val remark: String,
+
+    @ColumnInfo(name = Config.COLUMN_DATE_MILLI)
+    val dateMilli: Long,
+
+    @ColumnInfo(name = Config.COLUMN_RENT_DATE_MILLI)
+    val rentDateMilli: Long
 ): Serializable {
 }

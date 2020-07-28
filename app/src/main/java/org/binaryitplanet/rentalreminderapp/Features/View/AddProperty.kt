@@ -43,7 +43,7 @@ class AddProperty : AppCompatActivity(), PropertyView {
             if (it.itemId == R.id.done) {
                 if(checkValidity() && editFlag)
                     updateData()
-                else
+                else if (checkValidity() && !editFlag)
                     saveData()
             }
             return@setOnMenuItemClickListener super.onOptionsItemSelected(it)

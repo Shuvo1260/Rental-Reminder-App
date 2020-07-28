@@ -1,5 +1,6 @@
 package org.binaryitplanet.rentalreminderapp.Features.View
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -64,64 +65,35 @@ class BackupAndRestore : Fragment() {
 
             try{
 
-//                var sdpath: String = ""
-//
-//                if(File("/storage/extSdCard/").exists())
-//                {
-//                    sdpath="/storage/extSdCard/"
-//                    Log.d(TAG, "Path: $sdpath")
-//                }
-//                if(File("/storage/sdcard1/").exists())
-//                {
-//                    sdpath="/storage/sdcard1/"
-//                    Log.d(TAG, "Path: $sdpath")
-//                }
-//                if(File("/storage/usbcard1/").exists())
-//                {
-//                    sdpath="/storage/usbcard1/"
-//                    Log.d(TAG, "Path: $sdpath")
-//                }
-//                if(File("/storage/sdcard0/").exists())
-//                {
-//                    sdpath="/storage/sdcard0/"
-//                    Log.d(TAG, "Path: $sdpath")
-//                }
-//                if(File("/mnt/sdcard/").exists())
-//                {
-//                    sdpath="/mnt/sdcard"
-//                    Log.d(TAG, "Path: $sdpath")
-//                }
-////                var sdpath1 = File(context?.getExternalFilesDir("/storage/emulated/0/"), Config.DATABASE_NAME_WITH_FORMAT)
-//                var sdpath1 = File("/storage/emulated/0/", Config.DATABASE_NAME_WITH_FORMAT)
-//                Log.d(TAG, "SDPath: $sdpath1")
-////                val db2 = File(sdpath, Config.DATABASE_NAME)
-////                db2.createNewFile()
-//                sdpath1.createNewFile()
-
-
                 Log.d(TAG, "Permitted")
                 DatabaseManager.getInstance(context!!)?.close()
 
                 val db = DatabaseManager.getInstance(context!!)?.openHelper?.writableDatabase?.path
                 val dbPath = File(db)
-//                val dbShm = File("$db-shm")
-//                val dbWal = File("$db-wal")
+                val dbShm = File("$db-shm")
+                val dbWal = File("$db-wal")
 
 //                copyDataFromOneToAnother(dbPath.path, sdpath1.path)
                 Log.d(TAG, "DB: + $db")
-//                Log.d(TAG, "DB: + $dbShm")
-//                Log.d(TAG, "DB: + $dbWal")
+                Log.d(TAG, "DB: + $dbShm")
+                Log.d(TAG, "DB: + $dbWal")
 
+                val folder = File(Config.SD_CARD_PATH)
 
-                val db2 = File(Config.SD_CARD_PATH, Config.DATABASE_NAME)
-//                val db2Shm = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-shm")
-//                val db2Wal = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-wal")
+                if (!folder.exists())
+                    folder.mkdirs()
+
+                val db2 = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + ".db")
+                val db2Shm = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-shm")
+                val db2Wal = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-wal")
 
 
                 Log.d(TAG, "Done")
                 copyDataFromOneToAnother(dbPath.path, db2.path)
-//                copyDataFromOneToAnother(dbShm.path, db2Shm.path)
-//                copyDataFromOneToAnother(dbWal.path, db2Wal.path)
+                if (Build.VERSION_CODES.Q == Build.VERSION.SDK_INT) {
+                    copyDataFromOneToAnother(dbShm.path, db2Shm.path)
+                    copyDataFromOneToAnother(dbWal.path, db2Wal.path)
+                }
 
                 Log.d(TAG, "Done")
                 binding.progress.visibility = View.INVISIBLE
@@ -177,16 +149,24 @@ class BackupAndRestore : Fragment() {
             Log.d(TAG, "DB: + $dbShm")
             Log.d(TAG, "DB: + $dbWal")
 
+            val folder = File(Config.SD_CARD_PATH)
 
-            val db2 = File(Config.SD_CARD_PATH, Config.DATABASE_NAME)
-//            val db2Shm = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-shm")
-//            val db2Wal = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-wal")
+            if (!folder.exists())
+                folder.mkdirs()
+
+//            val db2 = File("/storage/emulated/0/", Config.DATABASE_NAME)
+            val db2 = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + ".db")
+            val db2Shm = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-shm")
+            val db2Wal = File(Config.SD_CARD_PATH, Config.DATABASE_NAME + "-wal")
 
 
             Log.d(TAG, "Done")
             copyDataFromOneToAnother(db2.path, dbPath.path)
-//            copyDataFromOneToAnother(db2Shm.path, dbShm.path)
-//            copyDataFromOneToAnother(db2Wal.path, dbWal.path)
+
+            if (Build.VERSION_CODES.Q == Build.VERSION.SDK_INT) {
+                copyDataFromOneToAnother(db2Shm.path, dbShm.path)
+                copyDataFromOneToAnother(db2Wal.path, dbWal.path)
+            }
 
             Log.d(TAG, "Done")
             binding.progress.visibility = View.INVISIBLE

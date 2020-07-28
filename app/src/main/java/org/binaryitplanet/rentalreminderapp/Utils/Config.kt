@@ -99,7 +99,7 @@ class Config {
         const val COLUMN_RENT_DATE_MILLI = "Rent_date_milli"
 
 //        Backup And Restore section
-        const val SD_CARD_PATH = "/sdcard/"
+        const val SD_CARD_PATH = "/storage/emulated/0/"
         const val BACKUP_REQUEST_CODE = 0
         const val RESTORE_REQUEST_CODE = 1
     }
